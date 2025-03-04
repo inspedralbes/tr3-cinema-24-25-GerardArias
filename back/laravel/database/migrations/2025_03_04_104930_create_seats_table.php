@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('seats', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('session_id')->constrained('sessions')->onDelete('cascade');
+            $table->foreignId('session_id')->constrained('film_sessions')->onDelete('cascade');
             $table->char('row', 1);
             $table->integer('number');
             $table->enum('type', ['Normal', 'VIP']);
