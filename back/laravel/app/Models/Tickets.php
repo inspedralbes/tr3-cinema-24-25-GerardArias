@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Ticket extends Model
+class Tickets extends Model
 {
     use HasFactory;
 
@@ -13,11 +13,11 @@ class Ticket extends Model
 
     public function session()
     {
-        return $this->belongsTo(Session::class);
+        return $this->belongsTo(FilmSessions::class);
     }
 
     public function seat()
     {
-        return $this->belongsTo(Seat::class);
+        return $this->belongsTo(Seats::class);
     }
 }

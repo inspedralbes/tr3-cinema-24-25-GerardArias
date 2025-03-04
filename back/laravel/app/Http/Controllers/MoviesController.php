@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Movie;
+use App\Models\Movies;
 use Illuminate\Http\Request;
 
-class MovieController extends Controller
+class MoviesController extends Controller
 {
     /**
      * Display a listing of the movies.
      */
     public function index()
     {
-        $movies = Movie::all();
+        $movies = Movies::all();
         return response()->json($movies);
     }
 
@@ -29,14 +29,14 @@ class MovieController extends Controller
             'poster' => 'required|string|max:255',
         ]);
 
-        $movie = Movie::create($request->all());
+        $movie = Movies::create($request->all());
         return response()->json($movie, 201);
     }
 
     /**
      * Display the specified movie.
      */
-    public function show(Movie $movie)
+    public function show(Movies $movie)
     {
         return response()->json($movie);
     }
@@ -44,7 +44,7 @@ class MovieController extends Controller
     /**
      * Update the specified movie in storage.
      */
-    public function update(Request $request, Movie $movie)
+    public function update(Request $request, Movies $movie)
     {
         $request->validate([
             'title' => 'sometimes|string|max:255',
@@ -61,7 +61,7 @@ class MovieController extends Controller
     /**
      * Remove the specified movie from storage.
      */
-    public function destroy(Movie $movie)
+    public function destroy(Movies $movie)
     {
         $movie->delete();
         return response()->json(null, 204);

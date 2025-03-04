@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Seat;
+use App\Models\Seats;
 use Illuminate\Http\Request;
 
-class SeatController extends Controller
+class SeatsController extends Controller
 {
     public function index()
     {
-        return response()->json(Seat::all());
+        return response()->json(Seats::all());
     }
 
     public function store(Request $request)
     {
-        $seat = Seat::create($request->validate([
+        $seat = Seats::create($request->validate([
             'session_id' => 'required|exists:sessions,id',
             'row' => 'required|string|size:1',
             'number' => 'required|integer',
