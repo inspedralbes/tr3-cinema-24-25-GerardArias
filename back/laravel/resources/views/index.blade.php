@@ -6,8 +6,7 @@
 
 
 <div class="hero">
-    <h1>Benvingut al CRUD</h1>
-    <p>Administra usuaris i projectes de manera sencilla i eficient.</p>
+    <h1>Benvingut al Administrador</h1>
 </div>
 
 <!-- Centrado de las columnas -->
@@ -26,6 +25,7 @@
     <div class="col-md-4 mb-4">
         <div class="card p-3 text-center">
             <h3>Sessions</h3>
+            <a href="{{ route('filmsessions.index') }}" class="btn btn-dark">Veure llistat de les sessions disponibles</a>
         </div>
     </div>
 </div>

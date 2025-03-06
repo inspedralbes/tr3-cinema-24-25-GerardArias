@@ -13,7 +13,7 @@ class MovieSeeder extends Seeder
         $apiKey = env('TMDB_API_KEY');
         $baseUrl = "https://api.themoviedb.org/3";
 
-        for ($page = 1; $page <= 3; $page++) {
+        for ($page = 1; $page <= 2; $page++) {
             $response = Http::get("$baseUrl/movie/popular", [
                 'api_key' => $apiKey,
                 'language' => 'es-ES',

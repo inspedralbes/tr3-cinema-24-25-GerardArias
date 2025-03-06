@@ -65,6 +65,6 @@ class MoviesController extends Controller
     public function destroy(Movies $movie)
     {
         $movie->delete();
-        return response()->json(null, 204);
+        return redirect()->route('movies.index')->with('success', 'Película eliminada correctamente');    
     }
 }
