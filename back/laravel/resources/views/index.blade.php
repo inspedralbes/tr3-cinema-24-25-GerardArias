@@ -23,6 +23,11 @@
             <h3>Entrades(tickets)</h3>
         </div>
     </div>
+    <div class="col-md-4 mb-4">
+        <div class="card p-3 text-center">
+            <h3>Sessions</h3>
+        </div>
+    </div>
 </div>
 
 @endsection

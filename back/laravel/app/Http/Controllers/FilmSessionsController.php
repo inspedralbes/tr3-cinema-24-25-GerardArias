@@ -9,7 +9,8 @@ class FilmSessionsController extends Controller
 {
     public function index()
     {
-        return response()->json(FilmSessions::with('movie')->get());
+        $filmSessions = FilmSessions::with('movie')->get();
+        return view('filmsessions.index', compact('filmSessions'));
     }
 
     public function store(Request $request)
