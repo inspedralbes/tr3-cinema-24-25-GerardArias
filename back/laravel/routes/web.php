@@ -9,4 +9,4 @@ Route::get('/', function () {
 });
 
 route::resource('movies',MoviesController::class);
-route::resource('filmsessions',FilmSessionsController::class);
+route::resource('sessions',FilmSessionsController::class);

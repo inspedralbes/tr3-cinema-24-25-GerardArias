@@ -25,7 +25,7 @@
     <div class="col-md-4 mb-4">
         <div class="card p-3 text-center">
             <h3>Sessions</h3>
-            <a href="{{ route('filmsessions.index') }}" class="btn btn-dark">Veure llistat de les sessions disponibles</a>
+            <a href="{{ route('sessions.index') }}" class="btn btn-dark">Veure llistat de les sessions disponibles</a>
         </div>
     </div>
 </div>

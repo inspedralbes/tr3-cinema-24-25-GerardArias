@@ -5,7 +5,7 @@
 @section('content')
     <h1>Crear Nueva Sesión</h1>
 
-    <form action="{{ route('filmsessions.store') }}" method="POST">
+    <form action="{{ route('sessions.store') }}" method="POST">
         @csrf
         <div>
             <label for="movie_id">Película:</label>

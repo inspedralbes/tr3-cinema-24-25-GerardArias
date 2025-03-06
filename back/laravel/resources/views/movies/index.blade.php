@@ -3,7 +3,7 @@
 @section('title', 'Inicio')
 
 @section('content')
-    <h1>Películas</h1>
+    <h1>Pel·licules</h1>
     <ul>
         @foreach($movies as $movie)
             <li>

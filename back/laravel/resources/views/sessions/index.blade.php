@@ -11,17 +11,17 @@
         </div>
     @endif
 
-    <a href="{{ route('filmsessions.create') }}">Crear Nueva Sesión</a>
+    <a href="{{ route('sessions.create') }}">Crear Nueva Sesión</a>
 
     <ul>
-        @foreach($filmSessions as $session)
+        @foreach($sessions as $session)
             <li>
                 <strong>{{ $session->movie->title }}</strong> - 
                 {{ $session->date }} - 
                 {{ $session->time }} 
-                <a href="{{ route('filmsessions.edit', $session->id) }}">Editar</a>
+                <a href="{{ route('sessions.edit', $session) }}">Editar</a>
 
-                <form action="{{ route('filmsessions.destroy', $session->id) }}" method="POST" style="display:inline;">
+                <form action="{{ route('sessions.destroy', $session->id) }}" method="POST" style="display:inline;">
                     @csrf
                     @method('DELETE')
                     <button type="submit" onclick="return confirm('¿Seguro que deseas eliminar esta sesión?')">Eliminar</button>

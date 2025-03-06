@@ -22,7 +22,7 @@
                         <a class="nav-link" href="">Tickets</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('filmsessions.index') }}">Sessions</a>
+                        <a class="nav-link" href="{{ route('sessions.index') }}">Sessions</a>
                     </li>
                 </ul>
             </div>
