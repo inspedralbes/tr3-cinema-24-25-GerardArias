@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Ticket;
+use App\Models\Tickets;
 use Illuminate\Http\Request;
 
-class TicketController extends Controller
+class TicketsController extends Controller
 {
     public function index()
     {
-        return response()->json(Ticket::all());
+        return response()->json(Tickets::all());
     }
 
     public function store(Request $request)
     {
-        $ticket = Ticket::create($request->validate([
+        $ticket = Tickets::create($request->validate([
             'user_id' => 'required|exists:users,id',
             'session_id' => 'required|exists:sessions,id',
             'seat_id' => 'required|exists:seats,id',
