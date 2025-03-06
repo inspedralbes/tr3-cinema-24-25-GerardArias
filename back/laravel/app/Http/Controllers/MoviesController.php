@@ -13,8 +13,9 @@ class MoviesController extends Controller
     public function index()
     {
         $movies = Movies::all();
-        return response()->json($movies);
+        return view('movies.index', compact('movies'));
     }
+
 
     /**
      * Store a newly created movie in storage.
