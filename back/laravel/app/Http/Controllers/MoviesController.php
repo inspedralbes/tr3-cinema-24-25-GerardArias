@@ -10,9 +10,14 @@ class MoviesController extends Controller
     /**
      * Display a listing of the movies.
      */
-    public function index()
+    public function index( Request $request)
     {
         $movies = Movies::all();
+
+        if ($request->is('api/*')) {
+            return response()->json($movies); 
+        }
+
         return view('movies.index', compact('movies'));
     }
 
