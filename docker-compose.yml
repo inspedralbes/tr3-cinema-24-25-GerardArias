@@ -52,14 +52,14 @@ services:
     command: bash -c "npm install && npm run dev"
 
   # Servicio de Node.js
-  node:
-    build:
-      context: ./back/node
-    ports:
-      - "3001:3001"
-    volumes:
-      - ./back/node:/node-app  # Volumen mapeado a /node-app en lugar de /app
-    depends_on:
-      - db
-    working_dir: /node-app  # Directorio de trabajo específico para Node.js
-    command: bash -c "npm install && node server.js"
+  # node:
+  #   build:
+  #     context: ./back/node
+  #   ports:
+  #     - "3001:3001"
+  #   volumes:
+  #     - ./back/node:/node-app  # Volumen mapeado a /node-app en lugar de /app
+  #   depends_on:
+  #     - db
+  #   working_dir: /node-app  # Directorio de trabajo específico para Node.js
+  #   command: bash -c "npm install && node server.js"
