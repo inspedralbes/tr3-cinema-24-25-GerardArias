@@ -1,0 +1,3 @@
+<template>
+    pel·licules
+</template>

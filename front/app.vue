@@ -1,26 +1,25 @@
 <template>
   <div>
-    <!-- Navbar -->
     <nav class="navbar">
       <div class="navbar-container">
         <div class="navbar-left">
-          <router-link to="/" class="navbar-item">Inicio</router-link>
-          <router-link to="/peliculas" class="navbar-item">Películas</router-link>
-          <router-link to="/sesiones" class="navbar-item">Sesiones</router-link>
+          <router-link to="/" class="navbar-item">Inici</router-link>
+          <router-link to="/peliculas" class="navbar-item">Pel·liculas</router-link>
+          <router-link to="/sessions" class="navbar-item">Sessions</router-link>
         </div>
 
         <div class="navbar-right">
           <router-link to="/carrito" class="navbar-item">
-            <i class="fa fa-shopping-cart"></i> ({{ carritoItems }})
+            <i class="fa fa-shopping-cart">Carret</i> ({{ carritoItems }})
           </router-link>
           <router-link to="/login" class="navbar-item">Login</router-link>
         </div>
       </div>
     </nav>
 
-    <!-- Contenido Principal -->
-    <nuxt />
+    <NuxtPage />
   </div>
+  
 </template>
 
 <script>
@@ -31,13 +30,11 @@ export default {
     };
   },
   computed: {
-    // Computed para mostrar el número de artículos en el carrito
     carritoItems() {
       return this.carrito.length;
     }
   },
   methods: {
-    // Método para añadir productos al carrito (ejemplo)
     agregarAlCarrito(producto) {
       this.carrito.push(producto);
     }
@@ -47,14 +44,14 @@ export default {
 
 <style scoped>
 .navbar {
-  background-color: #173317;
+  background-color: #323b32;
   padding: 1rem;
   color: white;
 }
 
 .navbar-container {
   display: flex;
-  justify-content: space-between; /* Separamos los elementos entre izquierda y derecha */
+  justify-content: space-between; 
   align-items: center;
 }
 
@@ -67,7 +64,7 @@ export default {
   color: white;
   text-decoration: none;
   font-size: 1.2rem;
-  margin-right: 20px; /* Espaciado entre los elementos */
+  margin-right: 20px;
 }
 
 .navbar-item:hover {
@@ -75,10 +72,10 @@ export default {
 }
 
 .fa-shopping-cart {
-  margin-right: 8px; /* Espaciado entre el ícono y el texto */
+  margin-right: 8px; 
 }
 
 .navbar-right {
-  justify-content: flex-end; /* Alinea el login y el carrito a la derecha */
+  justify-content: flex-end; 
 }
 </style>
