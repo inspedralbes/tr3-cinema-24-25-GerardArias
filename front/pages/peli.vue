@@ -1,11 +1,10 @@
 <template>
   <div class="peli-card border p-2 mb-4 rounded-md">
     <h3 class="text-lg font-semibold">{{ peli.title }}</h3>
-    <p class="text-sm"><strong>Género:</strong> {{ peli.genre }}</p>
-    <p class="text-sm"><strong>Duración:</strong> {{ peli.runtime }} minutos</p>
+    <p class="text-sm"><strong>Gènere:</strong> {{ peli.genre }}</p>
+    <p class="text-sm"><strong>Durada:</strong> {{ peli.runtime }} minuts</p>
     <!-- <p class="text-sm"><strong>Resumen:</strong> {{ peli.plot }}</p> -->
-    <!-- Imagen más pequeña -->
-    <img :src="peli.poster" alt="Poster de la película"/>
+    <img :src="peli.poster" alt="Poster de la película" />
   </div>
 </template>
 

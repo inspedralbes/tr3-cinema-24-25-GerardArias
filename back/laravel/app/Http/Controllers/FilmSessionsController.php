@@ -8,9 +8,14 @@ use Illuminate\Http\Request;
 
 class FilmSessionsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $sessions = filmSessions::with('movie')->get();
+
+        if ($request->is('api/*')) {
+            return response()->json($sessions);
+        }
+
         return view('sessions.index', compact('sessions'));
     }
 
