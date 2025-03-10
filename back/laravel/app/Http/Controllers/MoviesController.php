@@ -15,7 +15,7 @@ class MoviesController extends Controller
         $movies = Movies::all();
 
         if ($request->is('api/*')) {
-            return response()->json($movies); 
+            return response()->json($movies);  
         }
 
         return view('movies.index', compact('movies'));
