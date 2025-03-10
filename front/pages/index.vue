@@ -11,10 +11,10 @@
     </div>
 
     <div v-else>
-      <div class="">
-        <div v-for="peli in peliculas.slice(0, 10)" :key="peli.id" class="flex justify-center">
+      <div class="imagenes-container">
+        <div v-for="peli in peliculas.slice(0, 10)" :key="peli.id" class="peli-item">
           <p class="text-center font-semibold">{{ peli.title }}</p>
-          <img :src="peli.poster" alt="Poster de la película" />
+          <img :src="peli.poster" alt="Poster de la película" class="poster-img" />
         </div>
       </div>
     </div>
@@ -24,7 +24,6 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import CommunicationManager from '@/stores/CommunicationManager';
-import Peli from './peli.vue';
 
 const peliculas = ref([]);
 const loading = ref(false);
@@ -54,8 +53,22 @@ onMounted(fetchPeliculas);
   align-items: center;
 }
 
-.peli-card {
-  background-color: #f9f9f9;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+.imagenes-container {
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: center; 
+  gap: 16px; 
+}
+
+.peli-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.poster-img {
+  width: 120px; 
+  height: auto;
+  margin-top: 8px;
 }
 </style>
