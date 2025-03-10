@@ -4,7 +4,7 @@
       <div class="navbar-container">
         <div class="navbar-left">
           <router-link to="/" class="navbar-item">Inici</router-link>
-          <router-link to="/peliculas" class="navbar-item">Pel·liculas</router-link>
+          <router-link to="/peliculas" class="navbar-item">Pel·licules</router-link>
           <router-link to="/sessions" class="navbar-item">Sessions</router-link>
         </div>
 
