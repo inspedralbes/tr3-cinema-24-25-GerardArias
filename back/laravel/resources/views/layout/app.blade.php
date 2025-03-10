@@ -24,6 +24,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('sessions.index') }}">Sessions</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('users.index') }}">Usuaris</a>
+                    </li>
                 </ul>
             </div>
         </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Seats;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class SeatsController extends Controller
 {

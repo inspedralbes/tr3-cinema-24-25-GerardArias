@@ -28,6 +28,12 @@
             <a href="{{ route('sessions.index') }}" class="btn btn-dark">Veure llistat de les sessions disponibles</a>
         </div>
     </div>
+    <div class="col-md-4 mb-4">
+        <div class="card p-3 text-center">
+            <h3>Sessions</h3>
+            <a href="{{ route('users.index') }}" class="btn btn-dark">Veure llistat dels usuaris</a>
+        </div>
+    </div>
 </div>
 
 @endsection
