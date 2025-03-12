@@ -31,13 +31,16 @@ class FilmSessionsController extends Controller
             'movie_id' => 'required|exists:movies,id',
             'date' => 'required|date',
             'time' => 'required|date_format:H:i',
-            'vip_enabled' => 'required|boolean',
-            'is_discount_day' => 'required|boolean',
         ]);
 
-        filmSessions::create($validated);
-        return redirect()->route('sessions.index')->with('success', 'Sessió creada correctament!');
+        $validated['vip_enabled'] = $request->has('vip_enabled') ? 1 : 0;
+        $validated['is_discount_day'] = $request->has('is_discount_day') ? 1 : 0;
+
+        FilmSessions::create($validated);
+
+        return redirect()->route('sessions.index')->with('success', 'Sesión creada correctamente!');
     }
+
 
     public function show(filmSessions $session)
     {
