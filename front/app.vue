@@ -9,9 +9,6 @@
         </div>
 
         <div class="navbar-right">
-          <router-link to="/carrito" class="navbar-item">
-            <i class="fa fa-shopping-cart">Carret</i> ({{ carritoItems }})
-          </router-link>
           <router-link to="/login" class="navbar-item">Login</router-link>
         </div>
       </div>
