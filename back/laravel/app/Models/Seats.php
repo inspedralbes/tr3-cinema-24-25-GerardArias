@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -8,7 +9,11 @@ class Seats extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['session_id', 'row', 'number', 'type', 'status'];
+    protected $fillable = ['session_id', 'seats_json'];
+
+    protected $casts = [
+        'seats_json' => 'array',
+    ];
 
     public function session()
     {
