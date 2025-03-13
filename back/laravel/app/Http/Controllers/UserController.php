@@ -34,12 +34,9 @@ class UserController extends Controller
 
         $user = User::create($validated);
 
-        $token = $user->createToken('YourAppName')->plainTextToken;
-
         if ($request->is('api/*')) {
             return response()->json([
                 'user' => $user,
-                'token' => $token
             ], 201);
         }
 
