@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
-class UserContoller extends Controller
+class UserController extends Controller
 {
     public function index(Request $request)
     {
@@ -39,10 +39,13 @@ class UserContoller extends Controller
 
         $user = User::create($validated);
 
+
         if ($request->is('api/*')) {
-            return response()->json($user, 201);
+            return response()->json([
+                'user' => $user,
+            ], 201);
         }
-        
+
         return redirect()->route('users.index')->with('success', 'Usuario creado exitosamente');
     }
 
@@ -55,7 +58,13 @@ class UserContoller extends Controller
 
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
-            return response()->json(['message' => 'Login exitoso', 'user' => $user]);
+            $token = $user->createToken('YourAppName')->plainTextToken;
+
+            return response()->json([
+                'message' => 'Login exitoso',
+                'user' => $user,
+                'token' => $token
+            ]);
         }
 
         return response()->json(['message' => 'Credenciales incorrectas'], 401);

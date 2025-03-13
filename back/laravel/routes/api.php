@@ -4,19 +4,19 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MoviesController;
 use App\Http\Controllers\FilmSessionsController;
-use App\Http\Controllers\UserContoller;
+use App\Http\Controllers\UserController;
 
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/users', [UserContoller::class, 'index']);
-    Route::get('/users/{id}', [UserContoller::class, 'show']);
-    Route::put('/users/{id}', [UserContoller::class, 'update']);
-    Route::delete('/users/{id}', [UserContoller::class, 'destroy']);
-    Route::post('/logout', [UserContoller::class, 'logout']);
+    Route::get('/users', [UserController::class, 'index']);
+    Route::get('/users/{id}', [UserController::class, 'show']);
+    Route::put('/users/{id}', [UserController::class, 'update']);
+    Route::delete('/users/{id}', [UserController::class, 'destroy']);
+    Route::post('/logout', [UserController::class, 'logout']);
 });
 
-Route::post('/register', [UserContoller::class, 'store']);
-Route::post('/login', [UserContoller::class, 'login']);
+Route::post('/register', [UserController::class, 'store']);
+Route::post('/login', [UserController::class, 'login']);
 
 Route::get('/movies', [MoviesController::class, 'index']); 
 Route::get('/sessions', [FilmSessionsController::class, 'index']);
