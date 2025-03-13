@@ -11,18 +11,13 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        $users = User::all();
+        $user = Auth::user();  // Obtiene el usuario autenticado
         
         if ($request->is('api/*')) {
-            return response()->json($users);
+            return response()->json($user);
         }
         
-        return view('users.index', compact('users'));
-    }
-
-    public function create()
-    {
-        return view('users.create');
+        return view('users.index', compact('user'));
     }
 
     public function store(Request $request)
@@ -39,10 +34,12 @@ class UserController extends Controller
 
         $user = User::create($validated);
 
+        $token = $user->createToken('YourAppName')->plainTextToken;
 
         if ($request->is('api/*')) {
             return response()->json([
                 'user' => $user,
+                'token' => $token
             ], 201);
         }
 
@@ -74,59 +71,5 @@ class UserController extends Controller
     {
         Auth::logout();
         return response()->json(['message' => 'Logout exitoso']);
-    }
-
-    public function show(Request $request, $id)
-    {
-        $user = User::findOrFail($id);
-        
-        if ($request->is('api/*')) {
-            return response()->json($user);
-        }
-        
-        return view('users.show', compact('user'));
-    }
-
-    public function edit($id)
-    {
-        $user = User::findOrFail($id);
-        return view('users.edit', compact('user'));
-    }
-
-    public function update(Request $request, $id)
-    {
-        $user = User::findOrFail($id);
-
-        $validated = $request->validate([
-            'name' => 'sometimes|string|max:255',
-            'lastname' => 'sometimes|string|max:255',
-            'email' => 'sometimes|string|email|max:255|unique:users,email,' . $id,
-            'password' => 'sometimes|string|min:8',
-            'phone' => 'sometimes|string|max:20',
-        ]);
-
-        if (isset($validated['password'])) {
-            $validated['password'] = Hash::make($validated['password']);
-        }
-
-        $user->update($validated);
-
-        if ($request->is('api/*')) {
-            return response()->json($user);
-        }
-        
-        return redirect()->route('users.index')->with('success', 'Usuario actualizado exitosamente');
-    }
-
-    public function destroy(Request $request, $id)
-    {
-        $user = User::findOrFail($id);
-        $user->delete();
-
-        if ($request->is('api/*')) {
-            return response()->json(['message' => 'Usuario eliminado exitosamente']);
-        }
-        
-        return redirect()->route('users.index')->with('success', 'Usuario eliminado exitosamente');
     }
 }
