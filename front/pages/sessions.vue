@@ -50,21 +50,73 @@ export default {
 
 <style scoped>
 .error {
-    color: red;
+    color: #e74c3c;
     font-weight: bold;
 }
 
-div{
+div {
     text-align: center;
+    font-family: Arial, sans-serif;
+    margin-top: 20px;
 }
-ul{
+
+ul {
     list-style: none;
+    padding: 0;
 }
 
 .session-card {
-  border: 1px solid black;
-  border-radius: 8px;
-  max-width: 400px;
-  margin-top: 5px;
+    background-color: #ffffff;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 15px;
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
+.session-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    font-size: 2rem;
+    color: #333333;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+p {
+    font-size: 1rem;
+    color: #555555;
+    margin-top: 5px;
+}
+
+strong {
+    color: #007bff;
+}
+
+ul p {
+    margin-bottom: 5px;
+}
+
+p:last-child {
+    margin-bottom: 0;
+}
+
+div p {
+    color: #555555;
+    font-size: 1.1rem;
+}
+
 </style>
