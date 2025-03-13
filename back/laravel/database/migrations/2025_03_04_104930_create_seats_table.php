@@ -11,8 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('seats', function (Blueprint $table) {
-            $table->json('seats_json')->nullable(); 
+        Schema::create('seats', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('session_id')->constrained('film_sessions')->onDelete('cascade');
+            $table->char('row', 1);
+            $table->integer('number');
+            $table->enum('type', ['Normal', 'VIP']);
+            $table->enum('status', ['Disponible', 'Ocupada']);
+            $table->timestamps();
+            $table->unique(['session_id', 'row', 'number']);
         });
     }
 

@@ -3,9 +3,8 @@ namespace App\Http\Controllers;
 
 use App\Models\FilmSessions;
 use App\Models\Movies;
-use App\Models\Seats;
+use App\Models\Seats;  // Asegúrate de incluir el modelo Seats
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class FilmSessionsController extends Controller
 {
@@ -27,40 +26,23 @@ class FilmSessionsController extends Controller
     }
 
     public function store(Request $request)
-    {
-        // Validar los datos enviados desde el formulario
-        $validated = $request->validate([
-            'movie_id' => 'required|exists:movies,id',
-            'date' => 'required|date',
-            'time' => 'required|date_format:H:i',
-            'vip_enabled' => 'sometimes|boolean',
-            'is_discount_day' => 'sometimes|boolean',
-        ]);
+{
+    $validated = $request->validate([
+        'movie_id' => 'required|exists:movies,id',
+        'date' => 'required|date',
+        'time' => 'required|date_format:H:i',
+        'vip_enabled' => 'sometimes|boolean', 
+        'is_discount_day' => 'sometimes|boolean',  
+    ]);
 
-        // Asignar valores booleanos para las opciones VIP y descuento
-        $validated['vip_enabled'] = $request->has('vip_enabled');
-        $validated['is_discount_day'] = $request->has('is_discount_day');
+    $validated['vip_enabled'] = $request->has('vip_enabled');
+    $validated['is_discount_day'] = $request->has('is_discount_day');
+    
+    $session = FilmSessions::create($validated);
+    $this->createSeatsForSession($session);
+    return redirect()->route('sessions.index')->with('success', 'Sessió creada correctament!');
+}
 
-        try {
-            // Crear la sesión
-            $session = FilmSessions::create($validated);
-            Log::info('Sesión creada con éxito con ID:', ['session_id' => $session->id]);
-
-            // Generar y guardar las butacas como JSON
-            $seatsJson = $this->generateSeatsJson($session);
-
-            // Guardar el JSON de las butacas en la tabla `seats` para esta sesión
-            $session->seats_json = $seatsJson;
-            $session->save(); // Guardamos el JSON en la sesión
-
-            // Redirigir con éxito
-            return redirect()->route('sessions.index')->with('success', 'Sessió creada correctament!');
-        } catch (\Exception $e) {
-            // Si algo sale mal, capturamos la excepción
-            Log::error('Error al crear la sesión:', ['error' => $e->getMessage()]);
-            return redirect()->back()->with('error', 'Ocurrió un error al crear la sesión.');
-        }
-    }
 
     public function show(FilmSessions $session)
     {
@@ -93,29 +75,23 @@ class FilmSessionsController extends Controller
         return redirect()->route('sessions.index')->with('success', 'Sessió eliminada.');
     }
 
-    // Función para crear las butacas a partir del JSON
-    private function generateSeatsJson(FilmSessions $session)
+    private function createSeatsForSession(FilmSessions $session)
     {
-        $rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'];
-        $maxSeatsPerRow = 10;
-
-        $seatsData = [];
+        $rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L']; 
+        $maxSeatsPerRow = 10; 
 
         foreach ($rows as $row) {
             for ($number = 1; $number <= $maxSeatsPerRow; $number++) {
                 $type = ($number <= 2 && $session->vip_enabled) ? 'VIP' : 'Normal';
 
-                // Crear un arreglo con la información de la butaca
-                $seatsData[] = [
+                Seats::create([
+                    'session_id' => $session->id,
                     'row' => $row,
                     'number' => $number,
                     'type' => $type,
                     'status' => 'Disponible',
-                ];
+                ]);
             }
         }
-
-        // Devolver el JSON con todas las butacas
-        return json_encode($seatsData);
     }
 }
