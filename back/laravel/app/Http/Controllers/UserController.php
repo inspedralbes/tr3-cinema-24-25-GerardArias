@@ -11,7 +11,7 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        $user = Auth::user();  // Obtiene el usuario autenticado
+        $user = Auth::user();
         
         if ($request->is('api/*')) {
             return response()->json($user);
@@ -26,7 +26,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8',
+            'password' => 'required|string|min:4',
             'phone' => 'required|string|max:20',
         ]);
 

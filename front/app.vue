@@ -10,6 +10,8 @@
 
         <div class="navbar-right">
           <router-link to="/login" class="navbar-item">Login</router-link>
+          <router-link to="/register" class="navbar-item">Register</router-link>
+          <router-link to="/profile" class="navbar-item">Profile</router-link>
         </div>
       </div>
     </nav>
