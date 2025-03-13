@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class UserContoller extends Controller
@@ -43,6 +44,27 @@ class UserContoller extends Controller
         }
         
         return redirect()->route('users.index')->with('success', 'Usuario creado exitosamente');
+    }
+
+    public function login(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => 'required|string|email',
+            'password' => 'required|string',
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+            return response()->json(['message' => 'Login exitoso', 'user' => $user]);
+        }
+
+        return response()->json(['message' => 'Credenciales incorrectas'], 401);
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        return response()->json(['message' => 'Logout exitoso']);
     }
 
     public function show(Request $request, $id)
