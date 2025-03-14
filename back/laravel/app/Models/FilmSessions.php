@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,5 +13,10 @@ class FilmSessions extends Model
     public function movie()
     {
         return $this->belongsTo(Movies::class);
+    }
+
+    public function seats()
+    {
+        return $this->hasMany(Seats::class);
     }
 }
