@@ -11,13 +11,13 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        $user = Auth::user();
-        
+        $users = User::all(); // Obtener todos los usuarios
+
         if ($request->is('api/*')) {
-            return response()->json($user);
+            return response()->json($users);
         }
-        
-        return view('users.index', compact('user'));
+
+        return view('users.index', compact('users'));
     }
 
     public function store(Request $request)
@@ -42,6 +42,41 @@ class UserController extends Controller
 
         return redirect()->route('users.index')->with('success', 'Usuario creado exitosamente');
     }
+
+    public function edit($id)
+    {
+        $user = User::findOrFail($id);
+        return view('users.edit', compact('user'));
+    }
+
+    public function create()
+    {
+        return view('users.create');
+    }
+
+    public function update(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $id,
+            'phone' => 'required|string|max:20',
+            'password' => 'nullable|string|min:4', // Contraseña opcional
+        ]);
+
+        if ($request->filled('password')) {
+            $validated['password'] = Hash::make($request->password);
+        } else {
+            unset($validated['password']);
+        }
+
+        $user->update($validated);
+
+        return redirect()->route('users.index')->with('success', 'Usuario actualizado correctamente');
+    }
+
 
     public function login(Request $request)
     {

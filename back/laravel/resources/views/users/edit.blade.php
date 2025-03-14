@@ -9,33 +9,31 @@
         @method('PUT')
 
         <div style="margin-bottom: 15px;">
-            <label for="name" style="font-size: 1.1em; color: #333;">Nombre:</label>
-            <input type="text" name="name" id="name" value="{{ $user->name }}" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 1em;">
+            <label for="name">Nombre:</label>
+            <input type="text" name="name" id="name" value="{{ old('name', $user->name) }}" required>
         </div>
 
         <div style="margin-bottom: 15px;">
-            <label for="lastname" style="font-size: 1.1em; color: #333;">Apellido:</label>
-            <input type="text" name="lastname" id="lastname" value="{{ $user->lastname }}" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 1em;">
+            <label for="lastname">Apellido:</label>
+            <input type="text" name="lastname" id="lastname" value="{{ old('lastname', $user->lastname) }}" required>
         </div>
 
         <div style="margin-bottom: 15px;">
-            <label for="email" style="font-size: 1.1em; color: #333;">Email:</label>
-            <input type="email" name="email" id="email" value="{{ $user->email }}" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 1em;">
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" value="{{ old('email', $user->email) }}" required>
         </div>
 
         <div style="margin-bottom: 15px;">
-            <label for="phone" style="font-size: 1.1em; color: #333;">Teléfono:</label>
-            <input type="text" name="phone" id="phone" value="{{ $user->phone }}" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 1em;">
+            <label for="phone">Teléfono:</label>
+            <input type="text" name="phone" id="phone" value="{{ old('phone', $user->phone) }}" required>
         </div>
 
         <div style="margin-bottom: 15px;">
-            <label for="password" style="font-size: 1.1em; color: #333;">Nueva Contraseña (opcional):</label>
-            <input type="password" name="password" id="password" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 1em;">
+            <label for="password">Nueva Contraseña (opcional):</label>
+            <input type="password" name="password" id="password">
         </div>
 
-        <button type="submit" style="background-color: #3498db; color: white; padding: 10px 20px; font-size: 1.2em; border: none; border-radius: 5px; cursor: pointer; width: 100%; margin-top: 20px;">
-            Actualizar
-        </button>
+        <button type="submit">Actualizar</button>
     </form>
 </div>
 @endsection

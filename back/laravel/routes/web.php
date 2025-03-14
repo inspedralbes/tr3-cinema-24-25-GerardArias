@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MoviesController;
 use App\Http\Controllers\FilmSessionsController;
-use App\Http\Controllers\UserContoller;
+use App\Http\Controllers\UserController;
 
 
 Route::get('/', function () {
@@ -12,5 +12,5 @@ Route::get('/', function () {
 
 route::resource('movies',MoviesController::class);
 route::resource('sessions',FilmSessionsController::class);
-route::resource('users',UserContoller::class);
+route::resource('users',UserController::class);
 
