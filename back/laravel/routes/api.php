@@ -4,13 +4,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MoviesController;
 use App\Http\Controllers\FilmSessionsController;
-use App\Http\Controllers\UserContoller;
+use App\Http\Controllers\UserController;
 
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/users', [UserController::class, 'index']);
+    Route::post('/logout', [UserController::class, 'logout']);
+});
+
+Route::post('/register', [UserController::class, 'store']);
+Route::post('/login', [UserController::class, 'login']);
 
 Route::get('/movies', [MoviesController::class, 'index']); 
 Route::get('/sessions', [FilmSessionsController::class, 'index']);
-Route::get('/users', [UserContoller::class, 'index']);
