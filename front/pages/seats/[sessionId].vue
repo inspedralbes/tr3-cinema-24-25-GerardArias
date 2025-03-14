@@ -8,9 +8,12 @@
             <h2>Asientos disponibles:</h2>
             <div class="seats-container">
                 <div v-for="seat in seats" :key="seat.id" class="seat" :class="{
-                    'available': seat.status === 'Disponible',
-                    'occupied': seat.status === 'Ocupada',
-                    'selected': selectedSeats.includes(seat.id)
+                    'available': seat.status === 'Disponible' && seat.type !== 'VIP',
+                    'occupied': seat.status === 'Ocupada' || (seat.type === 'VIP' && seat.status === 'Ocupada'),
+                    'selected': selectedSeats.includes(seat.id) && seat.status !== 'Ocupada',
+                    'vip': seat.type === 'VIP' && seat.status === 'Disponible',
+                    'vip-selected': selectedSeats.includes(seat.id) && seat.type === 'VIP' && seat.status !== 'Ocupada',
+                    'vip-occupied': seat.type === 'VIP' && seat.status === 'Ocupada'
                 }" @click="toggleSeatSelection(seat)">
                     {{ seat.row }}{{ seat.number }}
                 </div>
@@ -26,7 +29,6 @@
         </div>
     </div>
 </template>
-
 <script>
 export default {
     data() {
@@ -57,6 +59,11 @@ export default {
         },
 
         toggleSeatSelection(seat) {
+            if (this.selectedSeats.length >= 10 && !this.selectedSeats.includes(seat.id)) {
+                alert('Solo puedes seleccionar un máximo de 10 asientos.');
+                return;  
+            }
+
             if (seat.status === 'Disponible') {
                 const seatIndex = this.selectedSeats.indexOf(seat.id);
                 if (seatIndex === -1) {
@@ -87,7 +94,7 @@ export default {
                     }
 
                     this.selectedSeats = [];
-                    this.fetchSeats(sessionId); 
+                    this.fetchSeats(sessionId);
                     alert('Compra realizada con éxito');
                 } catch (error) {
                     console.error('Error al comprar entradas:', error);
@@ -96,11 +103,10 @@ export default {
             } else {
                 alert('Por favor, selecciona al menos un asiento.');
             }
-        }
+        },
     },
 };
 </script>
-
 <style scoped>
 .error {
     color: red;
@@ -108,22 +114,29 @@ export default {
 }
 
 .seats-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(10, 50px);
+    gap: 5px;
     margin-top: 20px;
+    justify-items: center;
+    justify-content: center;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 .seat {
-    margin: 5px;
     padding: 10px;
-    background-color: #ccc;
+    background-color: #BDBDBD;
     border-radius: 4px;
     cursor: pointer;
+    text-align: center;
+    font-size: 14px;
+    width: 40px;
+    height: 40px;
 }
 
 .available {
-    background-color: #8BC34A;
+    background-color: #BDBDBD;
 }
 
 .occupied {
@@ -131,7 +144,21 @@ export default {
 }
 
 .selected {
-    background-color: #FFEB3B;
+    background-color: #8BC34A;
+}
+
+.vip {
+    background-color: #FFD700;
+    border: 2px solid #FFC107;
+}
+
+.vip-selected {
+    background-color: #76D7C4;
+}
+
+.vip-occupied {
+    background-color: #F44336;
+    border: 2px solid #C0392B;
 }
 
 .button {
