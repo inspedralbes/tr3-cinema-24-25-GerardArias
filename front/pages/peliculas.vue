@@ -76,7 +76,7 @@ body {
 .peliculas-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center;    
     width: 100%;
     overflow-x: hidden;
 }
@@ -86,12 +86,12 @@ body {
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
     width: 100%;
-    padding: 10px;
+    padding: 30px;
     box-sizing: border-box;
 }
 
 .peli-card {
-    background-color: #f9f9f9;
+    background-color: #ffffff;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     transition: transform 0.3s ease;
@@ -101,6 +101,7 @@ body {
     justify-content: space-between;
     height: 600px;
     overflow: hidden;
+    border-radius: 8px;
 }
 
 .peli-card:hover {
@@ -111,6 +112,29 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 8px;
+}
+
+h3, p {
+    margin-top: 10px;
+    color: #333333;
+}
+
+h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+p {
+    font-size: 1rem;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-red-600 {
+    color: #e74c3c;
 }
 
 .modal {
@@ -127,7 +151,7 @@ body {
 }
 
 .modal-content {
-    background-color: #fff;
+    background-color: #ffffff;
     padding: 20px;
     border-radius: 8px;
     max-width: 600px;
@@ -137,7 +161,7 @@ body {
 .close-button {
     margin-top: 20px;
     padding: 10px 15px;
-    background-color: #007BFF;
+    background-color: #FF5733;
     color: white;
     border: none;
     border-radius: 5px;
@@ -145,6 +169,6 @@ body {
 }
 
 .close-button:hover {
-    background-color: #0056b3;
+    background-color: #C0392B;
 }
 </style>

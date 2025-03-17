@@ -7,33 +7,31 @@
     <form action="{{ route('users.store') }}" method="POST">
         @csrf
         <div style="margin-bottom: 15px;">
-            <label for="name" style="font-size: 1.1em; color: #333;">Nombre:</label>
-            <input type="text" name="name" id="name" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 1em;">
+            <label for="name">Nombre:</label>
+            <input type="text" name="name" id="name" required>
         </div>
 
         <div style="margin-bottom: 15px;">
-            <label for="lastname" style="font-size: 1.1em; color: #333;">Apellido:</label>
-            <input type="text" name="lastname" id="lastname" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 1em;">
+            <label for="lastname">Apellido:</label>
+            <input type="text" name="lastname" id="lastname" required>
         </div>
 
         <div style="margin-bottom: 15px;">
-            <label for="email" style="font-size: 1.1em; color: #333;">Email:</label>
-            <input type="email" name="email" id="email" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 1em;">
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" required>
         </div>
 
         <div style="margin-bottom: 15px;">
-            <label for="phone" style="font-size: 1.1em; color: #333;">Teléfono:</label>
-            <input type="text" name="phone" id="phone" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 1em;">
+            <label for="phone">Teléfono:</label>
+            <input type="text" name="phone" id="phone" required>
         </div>
 
         <div style="margin-bottom: 15px;">
-            <label for="password" style="font-size: 1.1em; color: #333;">Contraseña:</label>
-            <input type="password" name="password" id="password" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 1em;">
+            <label for="password">Contraseña:</label>
+            <input type="password" name="password" id="password" required>
         </div>
 
-        <button type="submit" style="background-color: #2ecc71; color: white; padding: 10px 20px; font-size: 1.2em; border: none; border-radius: 5px; cursor: pointer; width: 100%; margin-top: 20px;">
-            Guardar
-        </button>
+        <button type="submit">Guardar</button>
     </form>
 </div>
 @endsection

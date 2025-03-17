@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Temps de generació: 10-03-2025 a les 09:25:13
+-- Temps de generació: 17-03-2025 a les 09:33:12
 -- Versió del servidor: 8.0.41-0ubuntu0.22.04.1
 -- Versió de PHP: 8.3.16
 
@@ -130,14 +130,14 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(25, '0001_01_01_000000_create_users_table', 1),
-(26, '0001_01_01_000001_create_cache_table', 1),
-(27, '0001_01_01_000002_create_jobs_table', 1),
-(28, '2025_03_04_090447_create_personal_access_tokens_table', 1),
-(29, '2025_03_04_103632_create_movies_table', 1),
-(30, '2025_03_04_104929_create_film_sessions_table', 1),
-(31, '2025_03_04_104930_create_seats_table', 1),
-(32, '2025_03_04_104941_create_tickets_table', 1);
+(135, '0001_01_01_000000_create_users_table', 1),
+(136, '0001_01_01_000001_create_cache_table', 1),
+(137, '0001_01_01_000002_create_jobs_table', 1),
+(138, '2025_03_04_090447_create_personal_access_tokens_table', 1),
+(139, '2025_03_04_103632_create_movies_table', 1),
+(140, '2025_03_04_104929_create_film_sessions_table', 1),
+(141, '2025_03_04_104930_create_seats_table', 1),
+(142, '2025_03_04_104941_create_tickets_table', 1);
 
 -- --------------------------------------------------------
 
@@ -155,6 +155,52 @@ CREATE TABLE `movies` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Bolcament de dades per a la taula `movies`
+--
+
+INSERT INTO `movies` (`id`, `title`, `plot`, `runtime`, `genre`, `poster`, `created_at`, `updated_at`) VALUES
+(1, 'Mickey 17', 'Mickey 17, un miembro de la tripulación \'expendable\' (prescindible) enviado a un planeta helado para colonizarlo, se niega a dejar que su clon de reemplazo, Mickey 18, tome su lugar... Adaptación del libro original de Edward Ashton.', 137, 'Ciencia ficción, Comedia, Aventura', 'https://image.tmdb.org/t/p/w500/fjIHkLGIZdjKIKe252gSFt5QzVK.jpg', '2025-03-17 08:31:31', '2025-03-17 08:31:31'),
+(2, 'The Metropolitan Opera: Fidelio', 'Sin descripción', 155, 'Música', 'https://image.tmdb.org/t/p/w500/zTdZGmVgjFow5MbKbq0NcIlXDtM.jpg', '2025-03-17 08:31:31', '2025-03-17 08:31:31'),
+(3, 'Paradiso', 'Sin descripción', 14, 'Drama, Terror', 'https://image.tmdb.org/t/p/w500/jN5fvKt25DtWVoPTRaEQgGmmMqd.jpg', '2025-03-17 08:31:31', '2025-03-17 08:31:31'),
+(4, '逃走', 'Sin descripción', 110, 'Desconocido', 'https://image.tmdb.org/t/p/w500/l8v8L2OC95tB4za2oex6wye4TwW.jpg', '2025-03-17 08:31:31', '2025-03-17 08:31:31'),
+(5, 'Afterwards', 'Sin descripción', 0, 'Terror, Romance', 'https://image.tmdb.org/t/p/w500/nR5oqvfkWw94vVChRRiZRwEXhCL.jpg', '2025-03-17 08:31:32', '2025-03-17 08:31:32'),
+(6, 'Myself Two Seconds to Cry', 'Sin descripción', 16, 'Música', 'https://image.tmdb.org/t/p/w500/cnqztuI8rYP2XkGDvhMUmLbqnNe.jpg', '2025-03-17 08:31:32', '2025-03-17 08:31:32'),
+(7, 'Vodu Entre deux mondes', 'Sin descripción', 53, 'Documental', 'https://image.tmdb.org/t/p/w500/pgFFAiInWaxkK3DDceITw3wUPKM.jpg', '2025-03-17 08:31:32', '2025-03-17 08:31:32'),
+(8, 'Royal-ish', 'Sin descripción', 0, 'Película de TV, Comedia, Romance', 'https://image.tmdb.org/t/p/w500/eviXuwmjoxSRzAz0sdkkvOEjNgh.jpg', '2025-03-17 08:31:32', '2025-03-17 08:31:32'),
+(9, '我家的事', 'Sin descripción', 99, 'Drama, Familia', 'https://image.tmdb.org/t/p/w500/kLI40epleDwfcpLRC6hAAQUerA4.jpg', '2025-03-17 08:31:32', '2025-03-17 08:31:32'),
+(10, 'Dead-Weight', 'Sin descripción', 9, 'Suspense, Comedia', 'https://image.tmdb.org/t/p/w500/7FIlPqSh9i8uSmyrimpRj6rbWag.jpg', '2025-03-17 08:31:32', '2025-03-17 08:31:32'),
+(11, '真爱营业', 'Sin descripción', 0, 'Romance, Comedia', 'https://image.tmdb.org/t/p/w500/lEnfI1fM97TYUSj4NykkUwI1yYF.jpg', '2025-03-17 08:31:32', '2025-03-17 08:31:32'),
+(12, 'A Day', 'Sin descripción', 23, 'Drama, Suspense', 'https://image.tmdb.org/t/p/w500/cVY0jS7iRs1TQwSMQAfufKJh9sd.jpg', '2025-03-17 08:31:32', '2025-03-17 08:31:32'),
+(13, 'Beneath The Tall Tree\'s Gaze', 'Sin descripción', 0, 'Drama, Terror', 'https://image.tmdb.org/t/p/w500/oVIJMEEO5elDaaFf9gyBP3HEl6M.jpg', '2025-03-17 08:31:33', '2025-03-17 08:31:33'),
+(14, 'Reincarnation', 'Sin descripción', 10, 'Ciencia ficción, Misterio, Suspense', 'https://image.tmdb.org/t/p/w500/4f0yXq68ukd5VBQGustyimX9ojz.jpg', '2025-03-17 08:31:33', '2025-03-17 08:31:33'),
+(15, 'Jenuh Eksistensialisme', 'Sin descripción', 5, 'Desconocido', 'https://image.tmdb.org/t/p/w500/kJGpgrsxW7ggv87vMQ1sJ6BQbAj.jpg', '2025-03-17 08:31:33', '2025-03-17 08:31:33'),
+(16, 'Nanay\'s Frankenstein', 'Sin descripción', 0, 'Desconocido', 'https://image.tmdb.org/t/p/w500', '2025-03-17 08:31:33', '2025-03-17 08:31:33'),
+(17, 'Sidelines', 'Sin descripción', 4, 'Drama, Familia', 'https://image.tmdb.org/t/p/w500/58pEKxrmCuetOe4Xs37k3ZZOC0O.jpg', '2025-03-17 08:31:33', '2025-03-17 08:31:33'),
+(18, 'Neverwhen', 'Sin descripción', 9, 'Fantasía, Romance', 'https://image.tmdb.org/t/p/w500/aToFeUkgGl2L7xSfb8r0hBbalx5.jpg', '2025-03-17 08:31:33', '2025-03-17 08:31:33'),
+(19, 'Departures', 'Sin descripción', 82, 'Desconocido', 'https://image.tmdb.org/t/p/w500/f7tWiwedxyIMg69D41deC8SxmxG.jpg', '2025-03-17 08:31:33', '2025-03-17 08:31:33'),
+(20, 'Please, Don’t Cry', 'Sin descripción', 16, 'Drama', 'https://image.tmdb.org/t/p/w500/MDMGJP5Q5qdeCwcvHt4SDGfclH.jpg', '2025-03-17 08:31:34', '2025-03-17 08:31:34'),
+(21, 'PÉPÉ', 'Sin descripción', 0, 'Drama', 'https://image.tmdb.org/t/p/w500/wRpLZFQmd3CNcFUv8TdAIVgCalE.jpg', '2025-03-17 08:31:34', '2025-03-17 08:31:34'),
+(22, 'Urtajo', 'Javier, un político acomodado, se enfrenta a un dilema cuando la fuga tóxica de una empresa que financia su partido, amenaza con contaminar un pueblo colindante.  Mientras intenta encubrir el desastre y lidia con problemas personales, tiene un accidente leve con otro conductor, cuya familia resultará estar directamente afectada por el vertido.', 11, 'Suspense, Drama', 'https://image.tmdb.org/t/p/w500/mxKrVRwLBkDeIXfWUWSmvtZY0Kp.jpg', '2025-03-17 08:31:34', '2025-03-17 08:31:34'),
+(23, 'I\'m Not Crying, You\'re Crying', 'Sin descripción', 0, 'Desconocido', 'https://image.tmdb.org/t/p/w500/684kfaDD22ZYL7LvCcpOBS0GQfh.jpg', '2025-03-17 08:31:34', '2025-03-17 08:31:34'),
+(24, 'Nunami: là où le vent chante', 'Sin descripción', 0, 'Documental, Música', 'https://image.tmdb.org/t/p/w500/6UWfXSaSbXxsA9n3TTBDwW6UGxf.jpg', '2025-03-17 08:31:34', '2025-03-17 08:31:34'),
+(25, 'Alchemy of the Word', 'Sin descripción', 15, 'Desconocido', 'https://image.tmdb.org/t/p/w500/q4XsIeugSMtTaaXoVL73fiHu7VD.jpg', '2025-03-17 08:31:34', '2025-03-17 08:31:34'),
+(26, 'England’s Lions: The New Generation', 'Sin descripción', 82, 'Documental', 'https://image.tmdb.org/t/p/w500', '2025-03-17 08:31:34', '2025-03-17 08:31:34'),
+(27, 'Der geräderte Mensch', 'Sin descripción', 0, 'Comedia', 'https://image.tmdb.org/t/p/w500/4gQ2ZnfZ6u6WB9iWmWm9sLCLqm1.jpg', '2025-03-17 08:31:34', '2025-03-17 08:31:34'),
+(28, 'Залог', 'Sin descripción', 100, 'Drama, Historia', 'https://image.tmdb.org/t/p/w500/aqsDDMTnmTZwbbZmDepqLFPdoiZ.jpg', '2025-03-17 08:31:34', '2025-03-17 08:31:34'),
+(29, 'Marciano García', 'Marciano García, un hombre con síndrome de Down, encuentra en su fantasía por convertirse en astronauta la excusa perfecta para no afrontar la muerte de su abuelo. Junto a su mejor amigo, Jose, hará todo lo posible para satisfacer su sueño, dejar el trabajo e huir a otro planeta.', 19, 'Drama', 'https://image.tmdb.org/t/p/w500/sdGwrjlFO9NII5mPKf57kCjX9VD.jpg', '2025-03-17 08:31:35', '2025-03-17 08:31:35'),
+(30, 'Full Out', 'Sin descripción', 14, 'Desconocido', 'https://image.tmdb.org/t/p/w500/eXvVjE5RyNKbxHCmmj1DLu55GKe.jpg', '2025-03-17 08:31:35', '2025-03-17 08:31:35'),
+(31, 'The Phalanx', 'Sin descripción', 13, 'Desconocido', 'https://image.tmdb.org/t/p/w500/4wgiJBrpvLh9kOe8feXd5MxLbzW.jpg', '2025-03-17 08:31:35', '2025-03-17 08:31:35'),
+(32, 'Songs Overheard in the Shadows', 'Sin descripción', 22, 'Desconocido', 'https://image.tmdb.org/t/p/w500/3Cgx8CMlZ8BL4ayG9fzZYuK5fYZ.jpg', '2025-03-17 08:31:35', '2025-03-17 08:31:35'),
+(33, 'גמד מחמד 4', 'Sin descripción', 22, 'Drama, Comedia, Suspense, Acción', 'https://image.tmdb.org/t/p/w500/9jw0tNgP3pRCq3WioDDbjwOI1n4.jpg', '2025-03-17 08:31:35', '2025-03-17 08:31:35'),
+(34, 'Charon', 'Sin descripción', 0, 'Drama, Misterio', 'https://image.tmdb.org/t/p/w500/AaWcKpzEstnN2pexQRRFcaZC38t.jpg', '2025-03-17 08:31:35', '2025-03-17 08:31:35'),
+(35, 'Y por si fuera poco, Godard', 'Sin descripción', 15, 'Desconocido', 'https://image.tmdb.org/t/p/w500/eeieVMafshP9PgwnAze9d9McoDT.jpg', '2025-03-17 08:31:35', '2025-03-17 08:31:35'),
+(36, 'Final', 'Sin descripción', 10, 'Desconocido', 'https://image.tmdb.org/t/p/w500/nSNOzbstoR0dW960oT1c33qGiYz.jpg', '2025-03-17 08:31:36', '2025-03-17 08:31:36'),
+(37, 'El abismo secreto', 'Dos agentes de élite son secretamente asignados a torres de vigilancia en los lados opuestos de un vasto desfiladero, para proteger al mundo de un misterioso mal que acecha en su interior. Se unen en la distancia, pero han de mantenerse alerta para defenderse del enemigo invisible. Cuando se les revela una amenaza fatal para la humanidad, deben trabajar juntos y poner a prueba su fuerza física y mental para mantener el secreto del desfiladero antes de que sea demasiado tarde.', 127, 'Romance, Ciencia ficción, Suspense', 'https://image.tmdb.org/t/p/w500/3s0jkMh0YUhIeIeioH3kt2X4st4.jpg', '2025-03-17 08:31:36', '2025-03-17 08:31:36'),
+(38, 'High Rollers', 'Sin descripción', 101, 'Acción, Crimen, Suspense', 'https://image.tmdb.org/t/p/w500/hHowAaChDjwueySmwVbsjHmpWa.jpg', '2025-03-17 08:31:36', '2025-03-17 08:31:36'),
+(39, 'Amenaza en el aire', 'En este claustrofóbico thriller, un piloto (Mark Wahlberg) transporta en su avioneta a una teniente general (Michelle Dockery) que custodia a un testigo (Topher Grace) que va a testificar en un juicio contra la mafia. A medida que atraviesan las montañas de Alaska, las tensiones se disparan, ya que no todo el mundo a bordo es quien parece ser. Y a 3.000 metros de altura no hay escapatoria posible.', 91, 'Acción, Suspense, Crimen', 'https://image.tmdb.org/t/p/w500/8T6nkYb4W8BIeafmFffyfsRciTL.jpg', '2025-03-17 08:31:36', '2025-03-17 08:31:36'),
+(40, 'Bill Burr: Drop Dead Years', 'Sin descripción', 69, 'Comedia', 'https://image.tmdb.org/t/p/w500/6fGOGNBvI50BfzAhTyB4amn9V2C.jpg', '2025-03-17 08:31:36', '2025-03-17 08:31:36');
 
 -- --------------------------------------------------------
 
@@ -219,13 +265,6 @@ CREATE TABLE `sessions` (
   `last_activity` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Bolcament de dades per a la taula `sessions`
---
-
-INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('hIf6u7lPsqXadNShiwxoGIyvtgLbUlogy0Wgn5fA', NULL, '127.0.0.1', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/114.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiSzdMbHhZSWJneWJHQ1pzYTBlcE5YdzQxUUFlOVlURXBOWXlDcnhjSiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjg6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9tb3ZpZXMiO319', 1741596485);
-
 -- --------------------------------------------------------
 
 --
@@ -234,7 +273,7 @@ INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, 
 
 CREATE TABLE `tickets` (
   `id` bigint UNSIGNED NOT NULL,
-  `user_id` bigint UNSIGNED NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `session_id` bigint UNSIGNED NOT NULL,
   `seat_id` bigint UNSIGNED NOT NULL,
   `price` int NOT NULL,
@@ -266,8 +305,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `lastname`, `email`, `email_verified_at`, `password`, `phone`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Test User', NULL, 'test@example.com', '2025-03-10 07:47:21', '$2y$12$Eb5lhTMyTQNDvSioZJ1wIud7n6mx.QS6IWa.YbhcRuH35CKZ6jSRO', NULL, 'qUdwoLjqAv', '2025-03-10 07:47:22', '2025-03-10 07:47:22'),
-(2, 'gerard', NULL, 'a23gerarimar@inspedralbes.cat', NULL, '$2y$12$WRI4Vyb8NHgPvLi.AZWCYuf0AHwaCi2DlSAw8OBg0Gh8umG65clHy', NULL, NULL, '2025-03-10 07:47:36', '2025-03-10 07:47:36');
+(1, 'Test User', NULL, 'test@example.com', '2025-03-17 08:31:24', '$2y$12$.uHua9u5QXlAyWnmtGF2pexGGVKTQcUrb1DKmRWoWu1vMtH3.8zUS', NULL, '0BXRpo88oF', '2025-03-17 08:31:25', '2025-03-17 08:31:25');
 
 --
 -- Índexs per a les taules bolcades
@@ -358,7 +396,6 @@ ALTER TABLE `sessions`
 --
 ALTER TABLE `tickets`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `tickets_user_id_foreign` (`user_id`),
   ADD KEY `tickets_session_id_foreign` (`session_id`),
   ADD KEY `tickets_seat_id_foreign` (`seat_id`);
 
@@ -395,13 +432,13 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT per la taula `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=143;
 
 --
 -- AUTO_INCREMENT per la taula `movies`
 --
 ALTER TABLE `movies`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT per la taula `personal_access_tokens`
@@ -425,7 +462,7 @@ ALTER TABLE `tickets`
 -- AUTO_INCREMENT per la taula `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restriccions per a les taules bolcades
@@ -448,8 +485,7 @@ ALTER TABLE `seats`
 --
 ALTER TABLE `tickets`
   ADD CONSTRAINT `tickets_seat_id_foreign` FOREIGN KEY (`seat_id`) REFERENCES `seats` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `tickets_session_id_foreign` FOREIGN KEY (`session_id`) REFERENCES `film_sessions` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `tickets_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `tickets_session_id_foreign` FOREIGN KEY (`session_id`) REFERENCES `film_sessions` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
