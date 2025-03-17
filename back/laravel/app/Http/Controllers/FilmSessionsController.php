@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\FilmSessions;
@@ -26,22 +27,22 @@ class FilmSessionsController extends Controller
     }
 
     public function store(Request $request)
-{
-    $validated = $request->validate([
-        'movie_id' => 'required|exists:movies,id',
-        'date' => 'required|date',
-        'time' => 'required|date_format:H:i',
-        'vip_enabled' => 'sometimes|boolean', 
-        'is_discount_day' => 'sometimes|boolean',  
-    ]);
+    {
+        $validated = $request->validate([
+            'movie_id' => 'required|exists:movies,id',
+            'date' => 'required|date',
+            'time' => 'required|date_format:H:i',
+            'vip_enabled' => 'sometimes|boolean',
+            'is_discount_day' => 'sometimes|boolean',
+        ]);
 
-    $validated['vip_enabled'] = $request->has('vip_enabled');
-    $validated['is_discount_day'] = $request->has('is_discount_day');
-    
-    $session = FilmSessions::create($validated);
-    $this->createSeatsForSession($session);
-    return redirect()->route('sessions.index')->with('success', 'Sessió creada correctament!');
-}
+        $validated['vip_enabled'] = $request->has('vip_enabled');
+        $validated['is_discount_day'] = $request->has('is_discount_day');
+
+        $session = FilmSessions::create($validated);
+        $this->createSeatsForSession($session);
+        return redirect()->route('sessions.index')->with('success', 'Sessió creada correctament!');
+    }
 
 
     public function show(FilmSessions $session)
@@ -77,12 +78,12 @@ class FilmSessionsController extends Controller
 
     private function createSeatsForSession(FilmSessions $session)
     {
-        $rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L']; 
-        $maxSeatsPerRow = 10; 
+        $rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'];
+        $maxSeatsPerRow = 10;
 
         foreach ($rows as $row) {
             for ($number = 1; $number <= $maxSeatsPerRow; $number++) {
-                $type = ($number <= 2 && $session->vip_enabled) ? 'VIP' : 'Normal';
+                $type = ($row == 'F' && $session->vip_enabled) ? 'VIP' : 'Normal';
 
                 Seats::create([
                     'session_id' => $session->id,
