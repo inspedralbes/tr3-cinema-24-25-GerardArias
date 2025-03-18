@@ -15,7 +15,7 @@ class TicketsController extends Controller
     public function store(Request $request)
     {
         $ticket = Tickets::create($request->validate([
-            'user_id' => 'required|exists:users,id',
+            'email' => 'required|string',
             'session_id' => 'required|exists:sessions,id',
             'seat_id' => 'required|exists:seats,id',
             'price' => 'required|integer',
