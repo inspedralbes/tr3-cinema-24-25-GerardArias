@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import { useUserStore } from '@/stores/userStore';
+import { useUserStore } from '@/stores/userStore'
 export default {
     data() {
         return {
@@ -57,108 +57,109 @@ export default {
             name: '',
             phone: '',
             email: ''
-        };
+        }
     },
     computed: {
         isLoggedIn() {
-            const userStore = useUserStore();
-            return userStore.isLoggedIn;
+            const userStore = useUserStore()
+            return userStore.isLoggedIn
         },
         sessionEmail() {
-            const userStore = useUserStore();
-            return userStore.getLoginInfo.email;
+            const userStore = useUserStore()
+            return userStore.getLoginInfo.email
         },
         sessionName() {
-            const userStore = useUserStore();
-            return userStore.getLoginInfo.name;
+            const userStore = useUserStore()
+            return userStore.getLoginInfo.name
         },
         sessionPhone() {
-            const userStore = useUserStore();
-            return userStore.getLoginInfo.phone;
+            const userStore = useUserStore()
+            return userStore.getLoginInfo.phone
         },
         totalCost() {
             return this.selectedSeats.reduce((acc, seatId) => {
-                const seat = this.seats.find(s => s.id === seatId);
-                return acc + (seat ? (seat.type === 'VIP' ? 8 : 6) : 0);
-            }, 0);
+                const seat = this.seats.find(s => s.id === seatId)
+                return acc + (seat ? (seat.type === 'VIP' ? 8 : 6) : 0)
+            }, 0)
         }
     },
     async created() {
-        this.checkSession();
-        const sessionId = this.$route.params.sessionId;
-        this.fetchSeats(sessionId);
+        this.checkSession()
+        const sessionId = this.$route.params.sessionId
+        this.fetchSeats(sessionId)
     },
     methods: {
         async fetchSeats(sessionId) {
-            this.loadingSeats = true;
+            this.loadingSeats = true
             try {
-                const response = await fetch(`http://127.0.0.1:8000/api/seats/session/${sessionId}`);
-                const seats = await response.json();
-                this.seats = seats;
+                const response = await fetch(`http://127.0.0.1:8000/api/seats/session/${sessionId}`)
+                const seats = await response.json()
+                this.seats = seats
             } catch (error) {
-                console.error('Error al obtener los asientos:', error);
-                this.error = 'No se pudo obtener la información de los asientos.';
+                console.error('Error al obtener los asientos:', error)
+                this.error = 'No se pudo obtener la información de los asientos.'
             } finally {
-                this.loadingSeats = false;
+                this.loadingSeats = false
             }
         },
         toggleSeatSelection(seat) {
             if (this.selectedSeats.length >= 10 && !this.selectedSeats.includes(seat.id)) {
-                alert('Solo puedes seleccionar un máximo de 10 asientos.');
-                return;
+                alert('Solo puedes seleccionar un máximo de 10 asientos.')
+                return
             }
             if (seat.status === 'Disponible') {
-                const index = this.selectedSeats.indexOf(seat.id);
+                const index = this.selectedSeats.indexOf(seat.id)
                 if (index === -1) {
-                    this.selectedSeats.push(seat.id);
+                    this.selectedSeats.push(seat.id)
                 } else {
-                    this.selectedSeats.splice(index, 1);
+                    this.selectedSeats.splice(index, 1)
                 }
             }
         },
         async purchaseSeats() {
             if (this.selectedSeats.length > 0) {
-                const sessionId = this.$route.params.sessionId;
+                const sessionId = this.$route.params.sessionId
+                const firstSeat = this.seats.find(s => s.id === this.selectedSeats[0])
+                const price = firstSeat ? (firstSeat.type === 'VIP' ? 8 : 6) : 6
                 try {
-                    const response = await fetch('http://127.0.0.1:8000/api/seats/update', {
+                    const response = await fetch('http://127.0.0.1:8000/api/tickets', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
+                            email: this.email,
                             session_id: sessionId,
                             seat_ids: this.selectedSeats,
-                            name: this.name,
-                            phone: this.phone,
-                            email: this.email
+                            price: price
                         })
-                    });
+                    })
                     if (!response.ok) {
-                        throw new Error('Error al actualizar los asientos');
+                        throw new Error('Error al crear los tickets')
                     }
-                    this.selectedSeats = [];
-                    this.fetchSeats(sessionId);
-                    alert('Compra realizada con éxito');
+                    this.selectedSeats = []
+                    this.fetchSeats(sessionId)
+                    alert('Compra realizada y correo enviado')
                 } catch (error) {
-                    console.error('Error al comprar entradas:', error);
-                    this.error = 'No se pudo completar la compra.';
+                    console.error('Error al comprar entradas:', error)
+                    this.error = 'No se pudo completar la compra.'
                 }
             } else {
-                alert('Por favor, selecciona al menos un asiento.');
+                alert('Por favor, selecciona al menos un asiento.')
             }
         },
         checkSession() {
             if (this.isLoggedIn) {
-                this.name = this.sessionName;
-                this.phone = this.sessionPhone;
-                this.email = this.sessionEmail;
+                this.name = this.sessionName
+                this.phone = this.sessionPhone
+                this.email = this.sessionEmail
             }
         },
         handleSubmit() {
-            this.purchaseSeats();
+            this.purchaseSeats()
         }
     }
-};
+}
 </script>
 
 <style scoped>
