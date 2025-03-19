@@ -94,4 +94,12 @@ function logout() {
 .navbar-right {
   justify-content: flex-end;
 }
+button{
+  border: none;
+  background-color: #ffffff;
+}
+button:hover{
+  background-color: #fad4d4;
+  border-radius: 10px;
+}
 </style>

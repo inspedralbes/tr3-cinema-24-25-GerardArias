@@ -181,62 +181,70 @@ export default {
 </script>
 
 <style scoped>
-.error {
-    color: red;
-    font-weight: bold;
-}
-
 .container {
     display: flex;
     justify-content: space-between;
     gap: 20px;
     margin: 20px;
+    padding: 20px;
+    background-color: #F5F5F5;
+    color: #333;
+    border-radius: 10px;
 }
 
 .seats-section {
     flex: 3;
+    text-align: center;
 }
 
-.form-section {
-    flex: 1;
-    background-color: #f4f4f4;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+h1, h2 {
+    color: #444;
 }
 
 .seats-container {
     display: grid;
     grid-template-columns: repeat(10, 50px);
-    gap: 5px;
-    margin-top: 20px;
-    justify-items: center;
+    gap: 8px;
+    margin: 20px auto;
     justify-content: center;
-    max-width: 600px;
-    margin: 0 auto;
+    padding: 20px;
+    background-color: #FFF;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .seat {
-    padding: 10px;
-    background-color: #BDBDBD;
-    border-radius: 4px;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
     cursor: pointer;
-    text-align: center;
-    font-size: 14px;
-    width: 40px;
-    height: 40px;
+    transition: all 0.3s ease-in-out;
+    border: 2px solid transparent;
 }
 
 .available {
     background-color: #BDBDBD;
+    color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .occupied {
-    background-color: #F44336;
+    background-color: #D32F2F;
+    color: white;
+    cursor: not-allowed;
+    opacity: 0.5;
+    border: 2px solid #B71C1C;
 }
 
 .selected {
-    background-color: #8BC34A;
+    background-color: #26A69A;
+    border: 3px solid #FF9800;
+    transform: scale(1.1);
 }
 
 .vip {
@@ -245,19 +253,56 @@ export default {
 }
 
 .vip-selected {
-    background-color: #76D7C4;
+    background-color: #26A69A;
+    border: 3px solid #FF6F00;
+    transform: scale(1.1);
 }
 
 .vip-occupied {
-    background-color: #F44336;
-    border: 2px solid #C0392B;
+    background-color: #D32F2F;
+    border: 2px solid #880E4F;
+    opacity: 0.5;
+}
+
+.form-section {
+    flex: 1;
+    background: #FFF;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .form-section input,
 .form-section button {
     width: 100%;
     margin: 10px 0;
-    padding: 10px;
+    padding: 12px;
     font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.form-section input {
+    background: #FFF;
+    color: #333;
+    width: 80%;
+}
+
+.form-section button {
+    background: #26A69A;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    border: none;
+}
+
+.form-section button:hover {
+    background: #1E8E82;
+}
+
+.error {
+    color: #D32F2F;
+    font-weight: bold;
 }
 </style>
