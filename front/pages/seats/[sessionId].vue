@@ -28,18 +28,19 @@
             <form @submit.prevent="handleSubmit">
                 <div>
                     <label for="name">Nombre:</label>
-                    <input type="text" v-model="name" placeholder="Ingresa tu nombre"/>
+                    <input type="text" v-model="name" placeholder="Ingresa tu nombre" />
                 </div>
                 <div>
                     <label for="phone">Número de teléfono:</label>
-                    <input type="tel" v-model="phone" placeholder="Ingresa tu teléfono"/>
+                    <input type="tel" v-model="phone" placeholder="Ingresa tu teléfono" />
                 </div>
                 <div>
                     <label for="email">Correo electrónico:</label>
-                    <input type="email" v-model="email" placeholder="Ingresa tu correo"/>
+                    <input type="email" v-model="email" placeholder="Ingresa tu correo" />
                 </div>
                 <p>Total: {{ totalCost }} €</p>
-                <button type="submit" :disabled="!selectedSeats.length || !name || !phone || !email">Comprar Entradas</button>
+                <button type="submit" :disabled="!selectedSeats.length || !name || !phone || !email">Comprar
+                    Entradas</button>
             </form>
         </div>
     </div>
@@ -118,11 +119,12 @@ export default {
         },
         async purchaseSeats() {
             if (this.selectedSeats.length > 0) {
-                const sessionId = this.$route.params.sessionId
-                const firstSeat = this.seats.find(s => s.id === this.selectedSeats[0])
-                const price = firstSeat ? (firstSeat.type === 'VIP' ? 8 : 6) : 6
+                const sessionId = this.$route.params.sessionId;
+                const firstSeat = this.seats.find(s => s.id === this.selectedSeats[0]);
+                const price = firstSeat ? (firstSeat.type === 'VIP' ? 8 : 6) : 6;
+
                 try {
-                    const response = await fetch('http://127.0.0.1:8000/api/tickets', {
+                    const ticketResponse = await fetch('http://127.0.0.1:8000/api/tickets', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
@@ -133,19 +135,35 @@ export default {
                             seat_ids: this.selectedSeats,
                             price: price
                         })
-                    })
-                    if (!response.ok) {
-                        throw new Error('Error al crear los tickets')
+                    });
+                    if (!ticketResponse.ok) {
+                        throw new Error('Error al crear los tickets');
                     }
-                    this.selectedSeats = []
-                    this.fetchSeats(sessionId)
-                    alert('Compra realizada y correo enviado')
+
+                    const seatUpdateResponse = await fetch('http://127.0.0.1:8000/api/seats/update', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            session_id: sessionId,
+                            seat_ids: this.selectedSeats,
+                        }),
+                    });
+
+                    if (!seatUpdateResponse.ok) {
+                        throw new Error('Error al actualizar el estado de los asientos');
+                    }
+
+                    this.selectedSeats = [];
+                    this.fetchSeats(sessionId);
+                    alert('Compra realizada, asientos actualizados y correo enviado');
                 } catch (error) {
-                    console.error('Error al comprar entradas:', error)
-                    this.error = 'No se pudo completar la compra.'
+                    console.error('Error al comprar entradas o actualizar asientos:', error);
+                    this.error = 'No se pudo completar la compra.';
                 }
             } else {
-                alert('Por favor, selecciona al menos un asiento.')
+                alert('Por favor, selecciona al menos un asiento.');
             }
         },
         checkSession() {
@@ -167,15 +185,18 @@ export default {
     color: red;
     font-weight: bold;
 }
+
 .container {
     display: flex;
     justify-content: space-between;
     gap: 20px;
     margin: 20px;
 }
+
 .seats-section {
     flex: 3;
 }
+
 .form-section {
     flex: 1;
     background-color: #f4f4f4;
@@ -183,6 +204,7 @@ export default {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
 .seats-container {
     display: grid;
     grid-template-columns: repeat(10, 50px);
@@ -193,6 +215,7 @@ export default {
     max-width: 600px;
     margin: 0 auto;
 }
+
 .seat {
     padding: 10px;
     background-color: #BDBDBD;
@@ -203,27 +226,35 @@ export default {
     width: 40px;
     height: 40px;
 }
+
 .available {
     background-color: #BDBDBD;
 }
+
 .occupied {
     background-color: #F44336;
 }
+
 .selected {
     background-color: #8BC34A;
 }
+
 .vip {
     background-color: #FFD700;
     border: 2px solid #FFC107;
 }
+
 .vip-selected {
     background-color: #76D7C4;
 }
+
 .vip-occupied {
     background-color: #F44336;
     border: 2px solid #C0392B;
 }
-.form-section input, .form-section button {
+
+.form-section input,
+.form-section button {
     width: 100%;
     margin: 10px 0;
     padding: 10px;
