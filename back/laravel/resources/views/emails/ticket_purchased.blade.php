@@ -10,6 +10,7 @@
     <ul>
         @foreach($tickets as $ticket)
             <li>Sesión: {{ $ticket->session_id }}, Asiento: {{ $ticket->seat_id }}, Precio: {{ $ticket->price }}€</li>
+            <img src="cid:ticket_qr_{{ $ticket->id }}" alt="QR Ticket" />
         @endforeach
     </ul>
 </body>
