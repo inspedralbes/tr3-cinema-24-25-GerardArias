@@ -1,6 +1,6 @@
 <template>
   <div class="peliculas-container p-4">
-    <h1 class="text-3xl font-bold mb-4">Pel·licules de la setmana</h1>
+    <h1 class="text-3xl font-bold mb-4">Pel·licules</h1>
 
     <div v-if="loading" class="text-center">
       Carregant...
@@ -12,7 +12,7 @@
 
     <div v-else>
       <div class="imagenes-container">
-        <div v-if="peliculas.length > 0" v-for="(peli, index) in peliculas.slice(currentIndex, currentIndex + 5)" :key="index" class="peli-item">
+        <div v-for="(peli, index) in peliculas.slice(currentIndex, currentIndex + 5)" :key="index" class="peli-item">
           <p class="text-center font-semibold">{{ peli.title }}</p>
           <img :src="peli.poster" alt="Poster de la película" class="poster-img" />
         </div>
