@@ -30,8 +30,8 @@ const userStore = useUserStore()
 
 const handleLogin = async () => {
   try {
-    await userStore.login(form.value) // Guarda la info de usuario en el store solo después de login
-    console.log('Login exitoso:', userStore.getLoginInfo) // Puedes ver los datos en la consola
+    await userStore.login(form.value) 
+    console.log('Login exitoso:', userStore.getLoginInfo)
     router.push('/profile')
   } catch (error) {
     console.error('Error al iniciar sesión:', error.message)
