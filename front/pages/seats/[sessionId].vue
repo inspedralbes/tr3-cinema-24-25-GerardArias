@@ -157,7 +157,7 @@ export default {
 
                     this.selectedSeats = [];
                     this.fetchSeats(sessionId);
-                    alert('Compra realizada, asientos actualizados y correo enviado');
+                    alert('Compra realizada, assientos reservados y entradas enviadas al correo');
                 } catch (error) {
                     console.error('Error al comprar entradas o actualizar asientos:', error);
                     this.error = 'No se pudo completar la compra.';
