@@ -40,17 +40,39 @@ export default class CommunicationManager {
     }
   }
 
-  static async updateSeatStatus(seatId, status) {
+  static async updateSeatStatus(sessionId, seatIds) {
     try {
-      const response = await fetch(`${API_URL}seats/update/${seatId}`, {
+      const response = await fetch(`${API_URL}seats/update`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ status }),
+        body: JSON.stringify({
+          session_id: sessionId,
+          seat_ids: seatIds,
+        }),
       });
       if (!response.ok) {
         throw new Error('Error al actualizar el estado de la butaca');
+      }
+      return await response.json();
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
+
+  static async purchaseTickets(data) {
+    try {
+      const response = await fetch(`${API_URL}tickets`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+      if (!response.ok) {
+        throw new Error('Error al comprar los tickets');
       }
       return await response.json();
     } catch (error) {
@@ -68,11 +90,9 @@ export default class CommunicationManager {
         },
         body: JSON.stringify(userData),
       });
-
       if (!response.ok) {
         throw new Error('Error al registrar el usuario');
       }
-
       return await response.json();
     } catch (error) {
       console.error(error);
@@ -89,11 +109,9 @@ export default class CommunicationManager {
         },
         body: JSON.stringify(credentials),
       });
-
       if (!response.ok) {
         throw new Error('Credenciales incorrectas');
       }
-
       return await response.json();
     } catch (error) {
       console.error(error);
@@ -107,17 +125,14 @@ export default class CommunicationManager {
       if (!token) {
         throw new Error('No autorizado');
       }
-
       const response = await fetch(`${API_URL}users`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
       });
-
       if (!response.ok) {
         throw new Error('No se pudo obtener el perfil');
       }
-
       return await response.json();
     } catch (error) {
       console.error(error);

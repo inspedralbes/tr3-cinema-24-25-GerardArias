@@ -1,15 +1,15 @@
 @extends('layout.app')
 
-@section('title', 'Crear Sesión de Cine')
+@section('title', 'Crear Sessió de Cinema')
 
 @section('content')
-    <h1 style="text-align: center; font-size: 2em; color: #333;">Crear Nueva Sesión</h1>
+    <h1 style="text-align: center; font-size: 2em; color: #333;">Crear Nova Sessió</h1>
 
     <form action="{{ route('sessions.store') }}" method="POST" style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px; background-color: #f9f9f9;">
         @csrf
         
         <div style="margin-bottom: 15px;">
-            <label for="movie_id" style="font-size: 1.1em; color: #333;">Película:</label>
+            <label for="movie_id" style="font-size: 1.1em; color: #333;">Pel·lícula:</label>
             <select name="movie_id" id="movie_id" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 1em;">
                 @foreach($movies as $movie)
                     <option value="{{ $movie->id }}">{{ $movie->title }}</option>
@@ -18,7 +18,7 @@
         </div>
 
         <div style="margin-bottom: 15px;">
-            <label for="date" style="font-size: 1.1em; color: #333;">Fecha:</label>
+            <label for="date" style="font-size: 1.1em; color: #333;">Data:</label>
             <input type="date" name="date" id="date" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 1em;">
         </div>
 
@@ -28,17 +28,17 @@
         </div>
 
         <div style="margin-bottom: 15px;">
-            <label for="vip_enabled" style="font-size: 1.1em; color: #333;">¿VIP?</label>
+            <label for="vip_enabled" style="font-size: 1.1em; color: #333;">VIP?</label>
             <input type="checkbox" name="vip_enabled" id="vip_enabled" value="1" style="margin-left: 10px;">
         </div>
 
         <div style="margin-bottom: 15px;">
-            <label for="is_discount_day" style="font-size: 1.1em; color: #333;">¿Día con descuento?</label>
+            <label for="is_discount_day" style="font-size: 1.1em; color: #333;">Dia amb descompte?</label>
             <input type="checkbox" name="is_discount_day" id="is_discount_day" value="1" style="margin-left: 10px;">
         </div>
 
         <button type="submit" style="background-color: #3498db; color: white; padding: 10px 20px; font-size: 1.2em; border: none; border-radius: 5px; width: 100%; cursor: pointer;">
-            Crear Sesión
+            Crear Sessió
         </button>
     </form>
 @endsection

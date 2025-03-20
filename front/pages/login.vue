@@ -1,16 +1,16 @@
 <template>
   <div>
-    <h1>Iniciar sesión</h1>
+    <h1>Iniciar sessió</h1>
     <form @submit.prevent="handleLogin">
       <div>
-        <label for="email">Correo electrónico:</label>
+        <label for="email">Correu electronic:</label>
         <input v-model="form.email" type="email" id="email" required />
       </div>
       <div>
-        <label for="password">Contraseña:</label>
+        <label for="password">Contrasenya:</label>
         <input v-model="form.password" type="password" id="password" required />
       </div>
-      <button type="submit">Iniciar sesión</button>
+      <button type="submit">Iniciar sessió</button>
     </form>
   </div>
 </template>

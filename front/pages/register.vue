@@ -1,25 +1,25 @@
 <template>
     <div>
-        <h1>Registrar Usuario</h1>
+        <h1>Registrar Usuari</h1>
         <form @submit.prevent="handleRegister">
             <div>
-                <label for="name">Nombre:</label>
+                <label for="name">Nom:</label>
                 <input v-model="form.name" type="text" id="name" required />
             </div>
             <div>
-                <label for="lastname">Apellido:</label>
+                <label for="lastname">Cognom:</label>
                 <input v-model="form.lastname" type="text" id="lastname" required />
             </div>
             <div>
-                <label for="email">Correo electrónico:</label>
+                <label for="email">Correu electrònic:</label>
                 <input v-model="form.email" type="email" id="email" required />
             </div>
             <div>
-                <label for="password">Contraseña:</label>
+                <label for="password">Contrasenya:</label>
                 <input v-model="form.password" type="password" id="password" required />
             </div>
             <div>
-                <label for="phone">Teléfono:</label>
+                <label for="phone">Telèfon:</label>
                 <input v-model="form.phone" type="text" id="phone" required />
             </div>
             <button type="submit">Registrar</button>
@@ -42,11 +42,11 @@ const form = ref({
 const handleRegister = async () => {
     try {
         const data = await CommunicationManager.registerUser(form.value)
-        console.log('Usuario registrado:', data)
-        alert('Usuario registrado exitosamente')
+        console.log('Usuari registrat:', data)
+        alert('Usuari registrat exitosament')
     } catch (error) {
-        console.error('Error al registrar el usuario:', error.message)
-        alert('Hubo un error al registrar el usuario')
+        console.error("Error en registrar l'usuari:", error.message)
+        alert("Hi ha hagut un error en registrar l'usuari")
     }
 }
 </script>

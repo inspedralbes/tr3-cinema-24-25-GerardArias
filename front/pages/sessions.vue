@@ -1,41 +1,40 @@
 <template>
   <div class="sessions-page">
-    <h1>Sesiones Disponibles</h1>
+    <h1>Sessions disponibles</h1>
 
-    <div v-if="loading" class="loading">Cargando...</div>
+    <div v-if="loading" class="loading">Carregant...</div>
     <div v-if="error" class="error">{{ error }}</div>
 
     <ul v-if="sessions.length > 0" class="sessions-list">
       <li v-for="session in sessions" :key="session.id">
         <div class="session-card">
-          <img :src="session.movie.poster" alt="Pelicula" class="card-img" />
+          <img :src="session.movie.poster" alt="Pel·lícula" class="card-img" />
           <div class="card-details">
             <h3>{{ session.movie.title }}</h3>
-            <p><strong>Género:</strong> {{ session.movie.genre }}</p>
-            <p><strong>Duración:</strong> {{ session.movie.runtime }} mins</p>
-            <p><strong>Fecha:</strong> {{ session.date }}</p>
+            <p><strong>Gènere:</strong> {{ session.movie.genre }}</p>
+            <p><strong>Duració:</strong> {{ session.movie.runtime }} min</p>
+            <p><strong>Data:</strong> {{ session.date }}</p>
             <p><strong>Hora:</strong> {{ session.time }}</p>
-            <p><strong>Butaques VIP:</strong> {{ session.vip_enabled ? 'Sí' : 'No' }}</p>
+            <p><strong>Seients VIP:</strong> {{ session.vip_enabled ? 'Sí' : 'No' }}</p>
             <p><strong>Dia espectador:</strong> {{ session.is_discount_day ? 'Sí' : 'No' }}</p>
             <div class="button-container">
-              <nuxt-link :to="`/seats/${session.id}`" class="button">Asientos</nuxt-link>
-              <button @click="showPlot(session.movie)" class="button">Descripción</button>
+              <nuxt-link :to="`/seats/${session.id}`" class="button">Seients</nuxt-link>
+              <button @click="showPlot(session.movie)" class="button">Descripció</button>
             </div>
-
           </div>
         </div>
       </li>
     </ul>
 
     <div v-if="sessions.length === 0 && !loading">
-      <p>No hay sesiones disponibles.</p>
+      <p>No hi ha sessions disponibles.</p>
     </div>
 
     <div v-if="selectedPeli" class="modal" @click="closeModal">
       <div class="modal-content" @click.stop>
         <h2>{{ selectedPeli.title }}</h2>
         <p>{{ selectedPeli.plot }}</p>
-        <button @click="closeModal" class="close-button">Cerrar</button>
+        <button @click="closeModal" class="close-button">Tanca</button>
       </div>
     </div>
   </div>
@@ -57,7 +56,7 @@ export default {
     try {
       this.sessions = await CommunicationManager.getSessions();
     } catch (error) {
-      this.error = 'Hubo un problema al cargar las sesiones.';
+      this.error = 'Hi ha hagut un problema en carregar les sessions.';
     } finally {
       this.loading = false;
     }
@@ -130,8 +129,8 @@ export default {
 
 .button-container {
   display: flex;
-  gap: 10px; /* Espacio entre los botones */
-  justify-content: center; /* Centra los botones */
+  gap: 10px;
+  justify-content: center;
 }
 
 .button {

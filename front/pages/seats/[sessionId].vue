@@ -1,11 +1,11 @@
 <template>
     <div class="container">
         <div class="seats-section">
-            <h1>Asientos de la sesión</h1>
-            <div v-if="loadingSeats">Cargando asientos...</div>
+            <h1>Seients de la sessió</h1>
+            <div v-if="loadingSeats">Carregant seients...</div>
             <div v-if="error" class="error">{{ error }}</div>
             <div v-if="seats.length > 0">
-                <h2>Asientos disponibles:</h2>
+                <h2>Seients disponibles:</h2>
                 <div class="seats-container">
                     <div v-for="seat in seats" :key="seat.id" class="seat" :class="{
                         'available': seat.status === 'Disponible' && seat.type !== 'VIP',
@@ -20,34 +20,35 @@
                 </div>
             </div>
             <div v-if="seats.length === 0 && !loadingSeats">
-                <p>No hi ha asientos disponibles para esta sesión.</p>
+                <p>No hi ha seients disponibles per a aquesta sessió.</p>
             </div>
         </div>
         <div class="form-section">
-            <h2>Detalles de Compra</h2>
+            <h2>Detalls de la compra</h2>
             <form @submit.prevent="handleSubmit">
                 <div>
-                    <label for="name">Nombre:</label>
-                    <input type="text" v-model="name" placeholder="Ingresa tu nombre" />
+                    <label for="name">Nom:</label>
+                    <input type="text" v-model="name" placeholder="Introdueix el teu nom" />
                 </div>
                 <div>
-                    <label for="phone">Número de teléfono:</label>
-                    <input type="tel" v-model="phone" placeholder="Ingresa tu teléfono" />
+                    <label for="phone">Número de telèfon:</label>
+                    <input type="tel" v-model="phone" placeholder="Introdueix el teu telèfon" />
                 </div>
                 <div>
-                    <label for="email">Correo electrónico:</label>
-                    <input type="email" v-model="email" placeholder="Ingresa tu correo" />
+                    <label for="email">Correu electrònic:</label>
+                    <input type="email" v-model="email" placeholder="Introdueix el teu correu" />
                 </div>
                 <p>Total: {{ totalCost }} €</p>
-                <button type="submit" :disabled="!selectedSeats.length || !name || !phone || !email">Comprar
-                    Entradas</button>
+                <button type="submit" :disabled="!selectedSeats.length || !name || !phone || !email">Comprar Entrades</button>
             </form>
         </div>
     </div>
 </template>
 
 <script>
-import { useUserStore } from '@/stores/userStore'
+import { useUserStore } from '@/stores/userStore';
+import CommunicationManager from '@/stores/CommunicationManager';
+
 export default {
     data() {
         return {
@@ -58,62 +59,60 @@ export default {
             name: '',
             phone: '',
             email: ''
-        }
+        };
     },
     computed: {
         isLoggedIn() {
-            const userStore = useUserStore()
-            return userStore.isLoggedIn
+            const userStore = useUserStore();
+            return userStore.isLoggedIn;
         },
         sessionEmail() {
-            const userStore = useUserStore()
-            return userStore.getLoginInfo.email
+            const userStore = useUserStore();
+            return userStore.getLoginInfo.email;
         },
         sessionName() {
-            const userStore = useUserStore()
-            return userStore.getLoginInfo.name
+            const userStore = useUserStore();
+            return userStore.getLoginInfo.name;
         },
         sessionPhone() {
-            const userStore = useUserStore()
-            return userStore.getLoginInfo.phone
+            const userStore = useUserStore();
+            return userStore.getLoginInfo.phone;
         },
         totalCost() {
             return this.selectedSeats.reduce((acc, seatId) => {
-                const seat = this.seats.find(s => s.id === seatId)
-                return acc + (seat ? (seat.type === 'VIP' ? 8 : 6) : 0)
-            }, 0)
+                const seat = this.seats.find(s => s.id === seatId);
+                return acc + (seat ? (seat.type === 'VIP' ? 8 : 6) : 0);
+            }, 0);
         }
     },
     async created() {
-        this.checkSession()
-        const sessionId = this.$route.params.sessionId
-        this.fetchSeats(sessionId)
+        this.checkSession();
+        const sessionId = this.$route.params.sessionId;
+        this.fetchSeats(sessionId);
     },
     methods: {
         async fetchSeats(sessionId) {
-            this.loadingSeats = true
+            this.loadingSeats = true;
             try {
-                const response = await fetch(`http://127.0.0.1:8000/api/seats/session/${sessionId}`)
-                const seats = await response.json()
-                this.seats = seats
+                this.seats = await CommunicationManager.getSeats(sessionId);
             } catch (error) {
-                console.error('Error al obtener los asientos:', error)
-                this.error = 'No se pudo obtener la información de los asientos.'
+                console.error('Error en obtenir els seients:', error);
+                this.error = 'No s\'ha pogut obtenir la informació dels seients.';
             } finally {
-                this.loadingSeats = false
+                this.loadingSeats = false;
             }
         },
         toggleSeatSelection(seat) {
             if (this.selectedSeats.length >= 10 && !this.selectedSeats.includes(seat.id)) {
-                alert('Solo puedes seleccionar un máximo de 10 asientos.')
-                return
+                alert('Només pots seleccionar un màxim de 10 seients.');
+                return;
             }
             if (seat.status === 'Disponible') {
-                const index = this.selectedSeats.indexOf(seat.id)
+                const index = this.selectedSeats.indexOf(seat.id);
                 if (index === -1) {
-                    this.selectedSeats.push(seat.id)
+                    this.selectedSeats.push(seat.id);
                 } else {
-                    this.selectedSeats.splice(index, 1)
+                    this.selectedSeats.splice(index, 1);
                 }
             }
         },
@@ -124,60 +123,38 @@ export default {
                 const price = firstSeat ? (firstSeat.type === 'VIP' ? 8 : 6) : 6;
 
                 try {
-                    const ticketResponse = await fetch('http://127.0.0.1:8000/api/tickets', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            email: this.email,
-                            session_id: sessionId,
-                            seat_ids: this.selectedSeats,
-                            price: price
-                        })
-                    });
-                    if (!ticketResponse.ok) {
-                        throw new Error('Error al crear los tickets');
-                    }
-
-                    const seatUpdateResponse = await fetch('http://127.0.0.1:8000/api/seats/update', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            session_id: sessionId,
-                            seat_ids: this.selectedSeats,
-                        }),
+                    await CommunicationManager.purchaseTickets({
+                        email: this.email,
+                        session_id: sessionId,
+                        seat_ids: this.selectedSeats,
+                        price: price
                     });
 
-                    if (!seatUpdateResponse.ok) {
-                        throw new Error('Error al actualizar el estado de los asientos');
-                    }
+                    await CommunicationManager.updateSeatStatus(sessionId, this.selectedSeats);
 
                     this.selectedSeats = [];
                     this.fetchSeats(sessionId);
-                    alert('Compra realizada, assientos reservados y entradas enviadas al correo');
+                    alert('Compra realitzada, seients reservats i entrades enviades al correu.');
                 } catch (error) {
-                    console.error('Error al comprar entradas o actualizar asientos:', error);
-                    this.error = 'No se pudo completar la compra.';
+                    console.error('Error en comprar entrades o actualitzar seients:', error);
+                    this.error = 'No s\'ha pogut completar la compra.';
                 }
             } else {
-                alert('Por favor, selecciona al menos un asiento.');
+                alert('Si us plau, selecciona almenys un seient.');
             }
         },
         checkSession() {
             if (this.isLoggedIn) {
-                this.name = this.sessionName
-                this.phone = this.sessionPhone
-                this.email = this.sessionEmail
+                this.name = this.sessionName;
+                this.phone = this.sessionPhone;
+                this.email = this.sessionEmail;
             }
         },
         handleSubmit() {
-            this.purchaseSeats()
+            this.purchaseSeats();
         }
     }
-}
+};
 </script>
 
 <style scoped>
@@ -197,7 +174,8 @@ export default {
     text-align: center;
 }
 
-h1, h2 {
+h1,
+h2 {
     color: #444;
 }
 

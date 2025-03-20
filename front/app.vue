@@ -10,7 +10,7 @@
         <div class="navbar-right">
           <router-link to="/login" class="navbar-item" v-if="!isLoggedIn">Login</router-link>
           <router-link to="/register" class="navbar-item" v-if="!isLoggedIn">Register</router-link>
-          <router-link to="/profile" class="navbar-item" v-if="isLoggedIn">Profile</router-link>
+          <router-link to="/profile" class="navbar-item" v-if="isLoggedIn">Perfil</router-link>
           
           <div v-if="isLoggedIn" class="user-info">
             <button @click="logout" class="navbar-item">Logout</button>

@@ -2,14 +2,14 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Compra de Entradas</title>
+    <title>Compra d'Entrades</title>
 </head>
 <body>
-    <h1>Detalles de tu compra</h1>
-    <p>Has comprado las siguientes entradas:</p>
+    <h1>Detalls de la teva compra</h1>
+    <p>Has comprat les següents entrades:</p>
     <ul>
         @foreach($tickets as $ticket)
-            <li>Sesión: {{ $ticket->session_id }}, Asiento: {{ $ticket->seat_id }}, Precio: {{ $ticket->price }}€</li>
+            <li>Sessió: {{ $ticket->session_id }}, Seient: {{ $ticket->seat_id }}, Preu: {{ $ticket->price }}€</li>
         @endforeach
     </ul>
 </body>

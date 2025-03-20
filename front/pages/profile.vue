@@ -1,16 +1,16 @@
 <template>
   <div class="profile-container">
     <div class="profile-card">
-      <h1>Perfil de Usuario</h1>
+      <h1>Perfil d'usuari</h1>
       <div v-if="user">
-        <p><strong>Nombre:</strong> {{ user.name }}</p>
-        <p><strong>Apellido:</strong> {{ user.lastname }}</p>
-        <p><strong>Correo electrónico:</strong> {{ user.email }}</p>
-        <p><strong>Teléfono:</strong> {{ user.phone }}</p>
-        <button @click="logout">Cerrar sesión</button>
+        <p><strong>Nom:</strong> {{ user.name }}</p>
+        <p><strong>Cognom:</strong> {{ user.lastname }}</p>
+        <p><strong>Correu electrònic:</strong> {{ user.email }}</p>
+        <p><strong>Telèfon:</strong> {{ user.phone }}</p>
+        <button @click="logout">Tanca la sessió</button>
       </div>
       <div v-else class="loading">
-        <p>Cargando perfil...</p>
+        <p>Carregant perfil...</p>
       </div>
     </div>
   </div>

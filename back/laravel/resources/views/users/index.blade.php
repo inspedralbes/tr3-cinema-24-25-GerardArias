@@ -2,7 +2,7 @@
 
 @section('content')
 <div style="max-width: 900px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px; background-color: #f9f9f9;">
-    <h2 style="text-align: center; font-size: 2em; color: #333;">Lista de Usuarios</h2>
+    <h2 style="text-align: center; font-size: 2em; color: #333;">Llista d'Usuaris</h2>
 
     @if(session('success'))
         <div style="background-color: #2ecc71; color: white; padding: 10px; margin-bottom: 15px; border-radius: 5px; text-align: center;">
@@ -12,7 +12,7 @@
 
     <div style="text-align: center; margin-bottom: 20px;">
         <a href="{{ route('users.create') }}" style="background-color: #3498db; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-size: 1em; cursor: pointer;">
-            Crear Usuario
+            Crear Usuari
         </a>
     </div>
 
@@ -20,11 +20,11 @@
         <thead>
             <tr>
                 <th style="padding: 12px; background-color: #3498db; color: white; text-align: left;">ID</th>
-                <th style="padding: 12px; background-color: #3498db; color: white; text-align: left;">Nombre</th>
-                <th style="padding: 12px; background-color: #3498db; color: white; text-align: left;">Apellido</th>
+                <th style="padding: 12px; background-color: #3498db; color: white; text-align: left;">Nom</th>
+                <th style="padding: 12px; background-color: #3498db; color: white; text-align: left;">Cognom</th>
                 <th style="padding: 12px; background-color: #3498db; color: white; text-align: left;">Email</th>
-                <th style="padding: 12px; background-color: #3498db; color: white; text-align: left;">Teléfono</th>
-                <th style="padding: 12px; background-color: #3498db; color: white; text-align: left;">Acciones</th>
+                <th style="padding: 12px; background-color: #3498db; color: white; text-align: left;">Teléfon</th>
+                <th style="padding: 12px; background-color: #3498db; color: white; text-align: left;">Accions</th>
             </tr>
         </thead>
         <tbody>

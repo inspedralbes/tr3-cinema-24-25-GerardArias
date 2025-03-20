@@ -37,7 +37,7 @@ const fetchPeliculas = async () => {
     const peliculasData = await CommunicationManager.getMovies();
     peliculas.value = peliculasData;
   } catch (err) {
-    error.value = 'Error al cargar las películas.';
+    error.value = 'Error al carregar les pel·licules.';
     console.error(err);
   } finally {
     loading.value = false;
