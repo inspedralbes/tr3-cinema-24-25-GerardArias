@@ -5,29 +5,30 @@
     <div v-if="loading" class="loading">Carregant...</div>
     <div v-if="error" class="error">{{ error }}</div>
 
-    <ul v-if="sessions.length > 0" class="sessions-list">
-      <li v-for="session in sessions" :key="session.id">
-        <div class="session-card">
-          <img :src="session.movie.poster" alt="Pel·lícula" class="card-img" />
-          <div class="card-details">
-            <h3>{{ session.movie.title }}</h3>
-            <p><strong>Gènere:</strong> {{ session.movie.genre }}</p>
-            <p><strong>Duració:</strong> {{ session.movie.runtime }} min</p>
-            <p><strong>Data:</strong> {{ session.date }}</p>
-            <p><strong>Hora:</strong> {{ session.time }}</p>
-            <p><strong>Seients VIP:</strong> {{ session.vip_enabled ? 'Sí' : 'No' }}</p>
-            <p><strong>Dia espectador:</strong> {{ session.is_discount_day ? 'Sí' : 'No' }}</p>
-            <div class="button-container">
-              <nuxt-link :to="`/seats/${session.id}`" class="button">Seients</nuxt-link>
-              <button @click="showPlot(session.movie)" class="button">Descripció</button>
-            </div>
-          </div>
-        </div>
-      </li>
-    </ul>
+    <div v-if="!loading && !error">
+      <h2>Sessions d'avui</h2>
+      <ul v-if="todaySessions.length > 0" class="sessions-list">
+        <li v-for="session in todaySessions" :key="session.id">
+          <SessionCard 
+            :session="session" 
+            @show-plot="showPlot"
+          />
+        </li>
+      </ul>
+      <p v-else>No hi ha sessions avui.</p>
+    </div>
 
-    <div v-if="sessions.length === 0 && !loading">
-      <p>No hi ha sessions disponibles.</p>
+    <div v-if="!loading && !error">
+      <h2>Properes sessions</h2>
+      <ul v-if="futureSessions.length > 0" class="sessions-list">
+        <li v-for="session in futureSessions" :key="session.id">
+          <SessionCard 
+            :session="session" 
+            @show-plot="showPlot"
+          />
+        </li>
+      </ul>
+      <p v-else>No hi ha properes sessions.</p>
     </div>
 
     <div v-if="selectedPeli" class="modal" @click="closeModal">
@@ -40,35 +41,48 @@
   </div>
 </template>
 
-<script>
-import CommunicationManager from '@/stores/CommunicationManager';
+<script setup>
+const sessions = ref([]);
+const loading = ref(true);
+const error = ref(null);
+const selectedPeli = ref(null);
 
-export default {
-  data() {
-    return {
-      sessions: [],
-      loading: true,
-      error: null,
-      selectedPeli: null,
-    };
-  },
-  async created() {
-    try {
-      this.sessions = await CommunicationManager.getSessions();
-    } catch (error) {
-      this.error = 'Hi ha hagut un problema en carregar les sessions.';
-    } finally {
-      this.loading = false;
-    }
-  },
-  methods: {
-    showPlot(peli) {
-      this.selectedPeli = peli;
-    },
-    closeModal() {
-      this.selectedPeli = null;
-    },
-  },
+const todaySessions = computed(() => {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return sessions.value.filter(session => {
+    const sessionDate = new Date(session.date);
+    sessionDate.setHours(0, 0, 0, 0);
+    return sessionDate.getTime() === today.getTime();
+  });
+});
+
+const futureSessions = computed(() => {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return sessions.value.filter(session => {
+    const sessionDate = new Date(session.date);
+    sessionDate.setHours(0, 0, 0, 0);
+    return sessionDate.getTime() > today.getTime();
+  });
+});
+
+onMounted(async () => {
+  try {
+    sessions.value = await CommunicationManager.getSessions();
+  } catch (err) {
+    error.value = 'Hi ha hagut un problema en carregar les sessions.';
+  } finally {
+    loading.value = false;
+  }
+});
+
+const showPlot = (peli) => {
+  selectedPeli.value = peli;
+};
+
+const closeModal = () => {
+  selectedPeli.value = null;
 };
 </script>
 
@@ -76,6 +90,11 @@ export default {
 .sessions-page {
   text-align: center;
   padding: 20px;
+}
+
+h2 {
+  color: #333;
+  margin: 30px 0 15px;
 }
 
 .loading {
@@ -94,57 +113,7 @@ export default {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px;
-}
-
-.session-card {
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  background-color: white;
-  transition: transform 0.3s;
-}
-
-.card-img {
-  width: 100%;
-  height: 200px;
-  object-fit: contain;
-}
-
-.card-details {
-  padding: 15px;
-  text-align: left;
-}
-
-.card-details h3 {
-  margin: 0 0 10px 0;
-  font-size: 1.5em;
-  color: #333;
-}
-
-.card-details p {
-  margin: 5px 0;
-  font-size: 1em;
-  color: #555;
-}
-
-.button-container {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-}
-
-.button {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #4caf50;
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.button:hover {
-  background-color: #45a049;
+  margin-bottom: 40px;
 }
 
 .modal {

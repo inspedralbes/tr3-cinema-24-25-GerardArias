@@ -12,6 +12,9 @@
       </div>
       <button type="submit" class="button-confirm">Iniciar sessió</button>
     </form>
+    <div class="image-container">
+      <img src="../assets/img/cine2.jpg" alt="Cine Image" class="image" />
+    </div>
   </div>
 </template>
 
@@ -41,83 +44,94 @@ const handleLogin = async () => {
 </script>
 
 <style scoped>
-  .login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 90vh;
-    background-color: #f0f4f8;
-  }
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  background-color: #f0f4f8;
+}
 
-  .form {
-    padding: 30px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
-  }
+.form {
+  padding: 30px;
+  background-color: #ffffff;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
 
-  .title {
-    color: #333;
-    font-weight: 700;
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
+.title {
+  color: #333;
+  font-weight: 700;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
 
-  .title span {
-    color: #666;
-    font-weight: 500;
-    font-size: 16px;
-  }
+.title span {
+  color: #666;
+  font-weight: 500;
+  font-size: 16px;
+}
 
-  .label {
-    font-size: 14px;
-    color: #444;
-    font-weight: 600;
-  }
+.label {
+  font-size: 14px;
+  color: #444;
+  font-weight: 600;
+}
 
-  .input {
-    width: 100%;
-    padding: 12px 15px;
-    border-radius: 8px;
-    border: 2px solid #ddd;
-    background-color: #f9f9f9;
-    font-size: 16px;
-    font-weight: 500;
-    color: #333;
-    margin-top: 5px;
-    outline: none;
-    transition: border 0.3s;
-  }
+.input {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 8px;
+  border: 2px solid #ddd;
+  background-color: #f9f9f9;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  margin-top: 5px;
+  outline: none;
+  transition: border 0.3s;
+}
 
-  .input:focus {
-    border: 2px solid #3498db;
-  }
+.input:focus {
+  border: 2px solid #3498db;
+}
 
-  .button-confirm {
-    margin-top: 20px;
-    width: 100%;
-    padding: 12px;
-    border-radius: 8px;
-    border: none;
-    background-color: #3498db;
-    color: white;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
+.button-confirm {
+  margin-top: 20px;
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  background-color: #3498db;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
 
-  .button-confirm:hover {
-    background-color: #2980b9;
-  }
+.button-confirm:hover {
+  background-color: #2980b9;
+}
 
-  .button-confirm:active {
-    transform: translateY(2px);
-  }
+.button-confirm:active {
+  transform: translateY(2px);
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image {
+  width: 100%;
+  max-width: 272px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+}
 </style>
