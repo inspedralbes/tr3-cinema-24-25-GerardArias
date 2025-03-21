@@ -16,10 +16,10 @@ class TicketsController extends Controller
 
     public function store(Request $request)
     {
-        $email = $request->input('email'); 
-        $session_id = $request->input('session_id'); 
-        $seat_ids = $request->input('seat_ids'); 
-        $price = $request->input('price'); 
+        $email = $request->input('email');
+        $session_id = $request->input('session_id');
+        $seat_ids = $request->input('seat_ids');
+        $price = $request->input('price');
         $data = [];
         $data['email'] = $email;
         $data['session_id'] = $session_id;
@@ -45,7 +45,10 @@ class TicketsController extends Controller
             $tickets[] = $ticket;
         }
 
+        $tickets = Tickets::with('seat')->whereIn('id', collect($tickets)->pluck('id'))->get();
+
         Mail::to($data['email'])->send(new TicketPurchased($tickets));
+
 
         return response()->json($tickets, 201);
     }

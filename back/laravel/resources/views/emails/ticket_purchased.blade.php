@@ -9,7 +9,11 @@
     <p>Has comprat les següents entrades:</p>
     <ul>
         @foreach($tickets as $ticket)
-            <li>Sessió: {{ $ticket->session_id }}, Seient: {{ $ticket->seat_id }}, Preu: {{ $ticket->price }}€</li>
+            <li>
+                Sessió: {{ $ticket->session_id }}, 
+                Seient: Fila {{ $ticket->seat->row }}, Número {{ $ticket->seat->number }}, 
+                Preu: {{ $ticket->price }}€
+            </li>
         @endforeach
     </ul>
 </body>
