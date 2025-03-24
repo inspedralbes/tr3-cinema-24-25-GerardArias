@@ -139,4 +139,17 @@ export default class CommunicationManager {
       throw error;
     }
   }
+
+  static async getUserTickets(email) {
+    try {
+      const response = await fetch(`${API_URL}tickets/${email}`);
+      if (!response.ok) {
+        throw new Error('Error al obtener los tickets del usuario');
+      }
+      return await response.json();
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
 }

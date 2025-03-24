@@ -5,6 +5,8 @@
         <div class="navbar-left">
           <router-link to="/" class="navbar-item">Inici</router-link>
           <router-link to="/sessions" class="navbar-item">Sessions</router-link>
+          <!-- Añadido enlace a la página de Tickets -->
+          <router-link to="/tickets" class="navbar-item">Tickets</router-link> <!-- Nuevo enlace -->
         </div>
 
         <div class="navbar-right">

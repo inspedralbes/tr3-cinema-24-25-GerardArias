@@ -22,3 +22,4 @@ Route::get('/sessions', [FilmSessionsController::class, 'index']);
 Route::get('seats/session/{sessionId}', [SeatsController::class, 'showSessionSeats']);
 Route::post('seats/update/', [SeatsController::class, 'updateSeatStatus']); 
 Route::post('/tickets', [TicketsController::class, 'store']);
+Route::get('/tickets/{email}', [TicketsController::class, 'getUserTickets']);

@@ -9,11 +9,6 @@ use App\Mail\TicketPurchased;
 
 class TicketsController extends Controller
 {
-    public function index()
-    {
-        return response()->json(Tickets::all());
-    }
-
     public function store(Request $request)
     {
         $email = $request->input('email');
@@ -26,14 +21,6 @@ class TicketsController extends Controller
         $data['seat_ids'] = $seat_ids;
         $data['price'] = $price;
 
-        // $data = $request->validate([
-        //     'email' => 'required|string',
-        //     'session_id' => 'required|exists:sessions,id',
-        //     'seat_ids' => 'required|array',
-        //     'seat_ids.*' => 'required|exists:seats,id',
-        //     'price' => 'required|integer'
-        // ]);
-
         $tickets = [];
         foreach ($data['seat_ids'] as $seat_id) {
             $ticket = Tickets::create([
@@ -45,11 +32,30 @@ class TicketsController extends Controller
             $tickets[] = $ticket;
         }
 
-        $tickets = Tickets::with('seat')->whereIn('id', collect($tickets)->pluck('id'))->get();
+        $tickets = Tickets::with('seat', 'filmSession.movie')->whereIn('id', collect($tickets)->pluck('id'))->get();
+
+        foreach ($tickets as $ticket) {
+            $ticket->seat_id = $ticket->seat->row . '-' . $ticket->seat->number;
+            $ticket->session_number = $ticket->filmSession->session_number;
+            $ticket->movie_name = $ticket->filmSession->movie->name;
+        }
 
         Mail::to($data['email'])->send(new TicketPurchased($tickets));
 
-
         return response()->json($tickets, 201);
+    }
+
+    public function getUserTickets($email)
+    {
+        $tickets = Tickets::with('seat', 'filmSession.movie')->where('email', $email)->get();
+
+        foreach ($tickets as $ticket) {
+            $ticket->seat_id = $ticket->seat->row . '-' . $ticket->seat->number;
+            $ticket->session_number = $ticket->filmSession->session_number;
+            $ticket->movie_name = $ticket->filmSession->movie->title; 
+        }
+
+
+        return response()->json($tickets);
     }
 }
