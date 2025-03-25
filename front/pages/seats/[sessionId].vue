@@ -41,6 +41,18 @@
                 <p>Total: {{ totalCost }} €</p>
                 <button type="submit" :disabled="!selectedSeats.length || !name || !phone || !email">Comprar Entrades</button>
             </form>
+
+            <!-- Ticket de compra -->
+            <div class="ticket" v-if="selectedTicketSeats.length">
+                <h3>Ticket de compra</h3>
+                <ul>
+                    <li v-for="seat in selectedTicketSeats" :key="seat.id">
+                        Butaca: {{ seat.row }}{{ seat.number }} - 
+                        Preu: {{ seat.type === 'VIP' ? '8€ (VIP)' : '6€' }}
+                    </li>
+                </ul>
+                <p><strong>Total: {{ totalCost }} €</strong></p>
+            </div>
         </div>
     </div>
 </template>
@@ -83,6 +95,10 @@ export default {
                 const seat = this.seats.find(s => s.id === seatId);
                 return acc + (seat ? (seat.type === 'VIP' ? 8 : 6) : 0);
             }, 0);
+        },
+        // Propiedad computada para obtener la info de las butacas seleccionadas
+        selectedTicketSeats() {
+            return this.seats.filter(seat => this.selectedSeats.includes(seat.id));
         }
     },
     async created() {
@@ -277,6 +293,29 @@ h2 {
 
 .form-section button:hover {
     background: #1E8E82;
+}
+
+.ticket {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #E0F7FA;
+    border: 1px solid #26A69A;
+    border-radius: 8px;
+}
+
+.ticket h3 {
+    margin-bottom: 10px;
+}
+
+.ticket ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 10px;
+}
+
+.ticket li {
+    margin-bottom: 5px;
+    font-weight: bold;
 }
 
 .error {
