@@ -51,11 +51,9 @@ class TicketsController extends Controller
 
         foreach ($tickets as $ticket) {
             $ticket->seat_id = $ticket->seat->row . '-' . $ticket->seat->number;
-            $ticket->session_number = $ticket->filmSession->session_number;
-            $ticket->movie_name = $ticket->filmSession->movie->title; 
+            $ticket->movie_name = $ticket->filmSession->movie->title;
+            $ticket->session_date = $ticket->filmSession->date;
         }
-
-
         return response()->json($tickets);
     }
 }

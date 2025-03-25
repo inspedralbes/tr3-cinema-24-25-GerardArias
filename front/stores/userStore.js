@@ -15,7 +15,6 @@ export const useUserStore = defineStore('user', {
   }),
 
   actions: {
-    // Login de usuario
     async login(credentials) {
       try {
         const data = await CommunicationManager.loginUser(credentials);
@@ -33,7 +32,6 @@ export const useUserStore = defineStore('user', {
       }
     },
 
-    // Fetch el perfil del usuario
     async fetchUserProfile() {
       if (!this.loginInfo.token) return;
       try {
@@ -44,7 +42,6 @@ export const useUserStore = defineStore('user', {
       }
     },
 
-    // Logout de usuario
     logout() {
       this.loginInfo = {
         loggedIn: false,
@@ -59,7 +56,6 @@ export const useUserStore = defineStore('user', {
       localStorage.removeItem('token');
     },
 
-    // Setea los datos del login
     setLoginInfo({ id, loggedIn, token, name, lastname, email, phone }) {
       this.loginInfo = { loggedIn, id, token, name, lastname, email, phone };
       localStorage.setItem('loginInfo', JSON.stringify(this.loginInfo));
