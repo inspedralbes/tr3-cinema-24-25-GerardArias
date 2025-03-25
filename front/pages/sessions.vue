@@ -140,7 +140,7 @@ h2 {
 .close-button {
   margin-top: 20px;
   padding: 10px;
-  background-color: #4caf50;
+  background-color: #5cb85c;
   color: white;
   border: none;
   border-radius: 5px;
@@ -148,6 +148,6 @@ h2 {
 }
 
 .close-button:hover {
-  background-color: #45a049;
+  background-color: #4cae4c;
 }
 </style>

@@ -107,7 +107,7 @@ const handleLogin = async () => {
   padding: 12px;
   border-radius: 8px;
   border: none;
-  background-color: #3498db;
+  background-color: #5cb85c;
   color: white;
   font-size: 16px;
   font-weight: 600;
@@ -116,7 +116,7 @@ const handleLogin = async () => {
 }
 
 .button-confirm:hover {
-  background-color: #2980b9;
+  background-color: #4cae4c;
 }
 
 .button-confirm:active {
