@@ -184,17 +184,14 @@ export default {
     color: #333;
     border-radius: 10px;
 }
-
 .seats-section {
     flex: 3;
     text-align: center;
 }
-
 h1,
 h2 {
     color: #444;
 }
-
 .seats-container {
     display: grid;
     grid-template-columns: repeat(10, 50px);
@@ -206,27 +203,29 @@ h2 {
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
-
 .seat {
-    width: 45px;
-    height: 45px;
+    width: 50px;
+    height: 50px;
+    background-color: #BDBDBD;
+    -webkit-mask-image: url('../../assets/img/butaca.png');
+    mask-image: url('../../assets/img/butaca.png');
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 16px;
     font-weight: bold;
-    border-radius: 8px;
     cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    border: 2px solid transparent;
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
-
 .available {
     background-color: #BDBDBD;
-    color: white;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
-
 .occupied {
     background-color: #D32F2F;
     color: white;
@@ -234,30 +233,22 @@ h2 {
     opacity: 0.5;
     border: 2px solid #B71C1C;
 }
-
 .selected {
     background-color: #26A69A;
-    border: 3px solid #FF9800;
     transform: scale(1.1);
 }
-
 .vip {
     background-color: #FFD700;
-    border: 2px solid #FFC107;
 }
-
 .vip-selected {
     background-color: #26A69A;
-    border: 3px solid #FF6F00;
     transform: scale(1.1);
 }
-
 .vip-occupied {
     background-color: #D32F2F;
     border: 2px solid #880E4F;
     opacity: 0.5;
 }
-
 .form-section {
     flex: 1;
     background: #FFF;
@@ -265,7 +256,6 @@ h2 {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
 .form-section input,
 .form-section button {
     width: 100%;
@@ -275,13 +265,11 @@ h2 {
     border-radius: 5px;
     border: 1px solid #ccc;
 }
-
 .form-section input {
     background: #FFF;
     color: #333;
     width: 80%;
 }
-
 .form-section button {
     background: #26A69A;
     color: white;
@@ -290,11 +278,9 @@ h2 {
     transition: 0.3s;
     border: none;
 }
-
 .form-section button:hover {
     background: #1E8E82;
 }
-
 .ticket {
     margin-top: 20px;
     padding: 15px;
@@ -302,22 +288,18 @@ h2 {
     border: 1px solid #26A69A;
     border-radius: 8px;
 }
-
 .ticket h3 {
     margin-bottom: 10px;
 }
-
 .ticket ul {
     list-style: none;
     padding: 0;
     margin-bottom: 10px;
 }
-
 .ticket li {
     margin-bottom: 5px;
     font-weight: bold;
 }
-
 .error {
     color: #D32F2F;
     font-weight: bold;

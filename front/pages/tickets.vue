@@ -14,7 +14,7 @@
             <tr>
               <th>Sessió</th>
               <th>Data</th>
-              <th>Accions</th>
+              <th>Tickets</th>
             </tr>
           </thead>
           <tbody>
@@ -24,7 +24,7 @@
                 <td>{{ tickets[0].session_date }}</td>
                 <td>
                   <button class="button" @click="toggleSession(sessionId)">
-                    {{ expandedSessions.includes(sessionId) ? 'Amagar' : 'Mostrar més' }}
+                    {{ expandedSessions.includes(sessionId) ? 'Amagar' : 'Mostrar tickets' }}
                   </button>
                 </td>
               </tr>
