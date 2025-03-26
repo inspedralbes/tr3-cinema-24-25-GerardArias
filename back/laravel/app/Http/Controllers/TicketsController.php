@@ -56,4 +56,19 @@ class TicketsController extends Controller
         }
         return response()->json($tickets);
     }
+
+    public function index()
+    {
+        $tickets = Tickets::with(['seat', 'filmSession.movie'])->get();
+        return view('tickets.index', compact('tickets'));
+    }
+
+
+    public function destroy($id)
+    {
+        $ticket = Tickets::findOrFail($id);
+        $ticket->delete();
+
+        return redirect()->route('tickets.index')->with('success', 'Ticket eliminado correctamente.');
+    }
 }

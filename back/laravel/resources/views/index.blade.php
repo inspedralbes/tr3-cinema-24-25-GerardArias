@@ -26,7 +26,9 @@
     <div class="col-md-4 mb-4">
         <div class="card p-3 text-center" style="background-color: #ecf0f1; border-radius: 15px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
             <h3 style="font-size: 1.8em; font-weight: bold; color: #34495e;">Entrades (Tickets)</h3>
-            <!-- Aquí puedes agregar algo más para las entradas -->
+            <a href="{{ route('tickets.index') }}" class="btn" style="background-color: #3498db; color: white; font-weight: bold; padding: 10px 20px; text-transform: uppercase; border-radius: 5px; transition: background-color 0.3s ease;">
+                Veure els tickets venuts
+            </a>      
         </div>
     </div>
 

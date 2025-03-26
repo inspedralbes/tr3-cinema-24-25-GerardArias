@@ -9,8 +9,6 @@ class Tickets extends Model
 {
     use HasFactory;
 
-    protected $table = 'tickets';
-
     protected $fillable = [
         'email',
         'session_id',
@@ -23,7 +21,7 @@ class Tickets extends Model
      */
     public function filmSession()
     {
-        return $this->belongsTo(FilmSessions::class, 'session_id');
+        return $this->belongsTo(FilmSessions::class, 'session_id', 'id');
     }
 
     /**
@@ -31,6 +29,6 @@ class Tickets extends Model
      */
     public function seat()
     {
-        return $this->belongsTo(Seats::class, 'seat_id');
+        return $this->belongsTo(Seats::class, 'seat_id', 'id');
     }
 }

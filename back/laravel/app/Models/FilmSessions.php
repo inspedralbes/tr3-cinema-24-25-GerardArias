@@ -12,11 +12,11 @@ class FilmSessions extends Model
 
     public function movie()
     {
-        return $this->belongsTo(Movies::class);
+        return $this->belongsTo(Movies::class, 'movie_id', 'id');
     }
 
     public function seats()
     {
-        return $this->hasMany(Seats::class);
+        return $this->hasMany(Seats::class, 'session_id', 'id');
     }
 }

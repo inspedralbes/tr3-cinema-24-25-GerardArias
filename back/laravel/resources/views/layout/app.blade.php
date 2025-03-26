@@ -19,7 +19,7 @@
                         <a class="nav-link" href="{{ route('movies.index') }}">Pel·licules</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">Tickets</a>
+                        <a class="nav-link" href="{{ route('tickets.index') }}">Tickets</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('sessions.index') }}">Sessions</a>
