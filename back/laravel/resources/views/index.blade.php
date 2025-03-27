@@ -4,52 +4,33 @@
 
 @section('content')
 
-<!-- Sección Hero -->
-<div class="hero" style="background-color: #2c3e50; padding: 60px 0; text-align: center; color: white; margin-bottom: 40px; border-radius: 10px;">
-    <h1 style="font-size: 3em; font-weight: bold; text-transform: uppercase;">Benvingut al Administrador</h1>
-    <p style="font-size: 1.2em; margin-top: 10px;">Gestiona totes les seccions des d'aquí</p>
+<div class="hero text-center text-white py-5" style="background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius: 10px; margin-bottom: 40px;">
+    <h1 class="fw-bold text-uppercase">Benvingut al Administrador</h1>
+    <p class="fs-5">Gestiona totes les seccions des d'aquí</p>
 </div>
 
-<!-- Tarjetas en columnas -->
-<div class="row d-flex justify-content-center">
-    <!-- Pel·lícules -->
-    <div class="col-md-4 mb-4">
-        <div class="card p-3 text-center" style="background-color: #ecf0f1; border-radius: 15px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
-            <h3 style="font-size: 1.8em; font-weight: bold; color: #34495e;">Pel·licules</h3>
-            <a href="{{ route('movies.index') }}" class="btn" style="background-color: #3498db; color: white; font-weight: bold; padding: 10px 20px; text-transform: uppercase; border-radius: 5px; transition: background-color 0.3s ease;">
-                Veure llistat de pel·licules
-            </a>
-        </div>
-    </div>
-    
-    <!-- Entrades (Tickets) -->
-    <div class="col-md-4 mb-4">
-        <div class="card p-3 text-center" style="background-color: #ecf0f1; border-radius: 15px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
-            <h3 style="font-size: 1.8em; font-weight: bold; color: #34495e;">Entrades (Tickets)</h3>
-            <a href="{{ route('tickets.index') }}" class="btn" style="background-color: #3498db; color: white; font-weight: bold; padding: 10px 20px; text-transform: uppercase; border-radius: 5px; transition: background-color 0.3s ease;">
-                Veure els tickets venuts
-            </a>      
-        </div>
-    </div>
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        @php
+            $sections = [
+                ['title' => 'Pel·lícules', 'route' => 'movies.index', 'icon' => '🎬'],
+                ['title' => 'Entrades', 'route' => 'tickets.index', 'icon' => '🎟️'],
+                ['title' => 'Sessions', 'route' => 'sessions.index', 'icon' => '📅'],
+                ['title' => 'Usuaris', 'route' => 'users.index', 'icon' => '👥']
+            ];
+        @endphp
 
-    <!-- Sessions -->
-    <div class="col-md-4 mb-4">
-        <div class="card p-3 text-center" style="background-color: #ecf0f1; border-radius: 15px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
-            <h3 style="font-size: 1.8em; font-weight: bold; color: #34495e;">Sessions</h3>
-            <a href="{{ route('sessions.index') }}" class="btn" style="background-color: #3498db; color: white; font-weight: bold; padding: 10px 20px; text-transform: uppercase; border-radius: 5px; transition: background-color 0.3s ease;">
-                Veure llistat de les sessions disponibles
-            </a>
-        </div>
-    </div>
-
-    <!-- Usuaris -->
-    <div class="col-md-4 mb-4">
-        <div class="card p-3 text-center" style="background-color: #ecf0f1; border-radius: 15px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
-            <h3 style="font-size: 1.8em; font-weight: bold; color: #34495e;">Usuaris</h3>
-            <a href="{{ route('users.index') }}" class="btn" style="background-color: #3498db; color: white; font-weight: bold; padding: 10px 20px; text-transform: uppercase; border-radius: 5px; transition: background-color 0.3s ease;">
-                Veure llistat dels usuaris
-            </a>
-        </div>
+        @foreach ($sections as $section)
+            <div class="col-md-4 mb-4">
+                <div class="card text-center p-4" style="background-color: #0f3460; color: white; border-radius: 15px; transition: transform 0.3s ease-in-out;">
+                    <div class="fs-1">{{ $section['icon'] }}</div>
+                    <h3 class="fw-bold mt-3">{{ $section['title'] }}</h3>
+                    <a href="{{ route($section['route']) }}" class="btn mt-3" style="background-color: #e94560; color: white; padding: 10px 20px; border-radius: 5px; transition: background-color 0.3s;">
+                        Veure més
+                    </a>
+                </div>
+            </div>
+        @endforeach
     </div>
 </div>
 
