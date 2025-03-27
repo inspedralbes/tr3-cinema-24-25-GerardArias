@@ -5,8 +5,7 @@
         <div class="navbar-left">
           <router-link to="/" class="navbar-item">Inici</router-link>
           <router-link to="/sessions" class="navbar-item">Sessions</router-link>
-          <!-- Añadido enlace a la página de Tickets -->
-          <router-link to="/tickets" class="navbar-item">Tickets</router-link> <!-- Nuevo enlace -->
+          <router-link to="/tickets" class="navbar-item">Tickets</router-link>
         </div>
 
         <div class="navbar-right">
@@ -27,7 +26,7 @@
 
 <script setup>
 import { useUserStore } from '@/stores/userStore' 
-import { onMounted } from 'vue'
+import { onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
 
 const userStore = useUserStore() 
@@ -63,6 +62,7 @@ function logout() {
   align-items: center;
 }
 
+/* Versión desktop */
 .navbar-left,
 .navbar-right {
   display: flex;
@@ -95,12 +95,33 @@ function logout() {
 .navbar-right {
   justify-content: flex-end;
 }
-button{
+
+button {
   border: none;
   background-color: #ffffff;
 }
-button:hover{
+button:hover {
   background-color: #fad4d4;
   border-radius: 10px;
+}
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0.8rem 1rem;
+  }
+  .navbar-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .navbar-left,
+  .navbar-right {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+  }
+  .navbar-item {
+    font-size: 1rem;
+    margin: 0.5rem;
+  }
 }
 </style>
