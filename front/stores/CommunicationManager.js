@@ -1,4 +1,7 @@
+// URL local
 const API_URL = 'http://127.0.0.1:8000/api/';
+// URL produccion 
+// const API_URL = 'http://a23gerarimarcineback.daw.inspedralbes.cat/api/';
 
 export default class CommunicationManager {
   static async getMovies() {
