@@ -1,0 +1,47 @@
+name: Deploy Nuxt 3 to HestiaCP
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js y PNPM
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'pnpm'
+
+      - name: Instalar dependencias
+        run: |
+          corepack enable
+          pnpm install
+
+      - name: Construir Nuxt 3
+        run: pnpm run build
+
+      - name: Subir archivos al servidor
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: ".output/"
+          target: "/home/${{ secrets.SSH_USER }}/web/${{ secrets.DOMAIN }}/public_html"
+
+      - name: Reiniciar PM2 (si usas SSR)
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /home/${{ secrets.SSH_USER }}/web/${{ secrets.DOMAIN }}/public_html
+            pm2 restart nuxt-app || pm2 start .output/server/index.mjs --name nuxt-app
