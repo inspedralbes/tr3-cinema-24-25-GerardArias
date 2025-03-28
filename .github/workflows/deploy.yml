@@ -1,4 +1,4 @@
-name: Deploy Nuxt 3 Frontend to HestiaCP 
+name: Deploy Nuxt 3 Frontend to HestiaCP
 
 on:
   push:
@@ -21,17 +21,26 @@ jobs:
         with:
           node-version: 18
           cache: 'npm'
-          cache-dependency-path: front/package-lock.json 
+          cache-dependency-path: front/package-lock.json
 
       - name: Instalar dependencias
         run: |
-          cd front 
+          cd front
           npm install
 
       - name: Construir Nuxt 3
         run: |
           cd front
           npm run build
+
+      - name: Crear directorio en el servidor
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            mkdir -p /home/${{ secrets.SSH_USER }}/web/${{ secrets.DOMAIN }}/public_html
 
       - name: Subir archivos al servidor
         uses: appleboy/scp-action@v0.1.7
@@ -41,6 +50,8 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: "front/.output/"
           target: "/home/${{ secrets.SSH_USER }}/web/${{ secrets.DOMAIN }}/public_html"
+          port: 22
+          debug: true
 
       - name: Reiniciar PM2 (si es SSR)
         uses: appleboy/ssh-action@v1.0.3
@@ -49,5 +60,4 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd /home/${{ secrets.SSH_USER }}/web/${{ secrets.DOMAIN }}/public_html
-            pm2 restart nuxt-app || pm2 start .output/server/index.mjs --name nuxt-app
+            pm2 restart all
