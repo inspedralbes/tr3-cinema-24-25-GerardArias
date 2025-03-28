@@ -95,6 +95,7 @@ const handleLogin = async () => {
   margin-top: 5px;
   outline: none;
   transition: border 0.3s;
+  width: 90%;
 }
 
 .input:focus {
@@ -133,5 +134,17 @@ const handleLogin = async () => {
   width: 100%;
   max-width: 272px;
   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .login-container {
+    flex-direction: column;
+  }
+  .image-container {
+    display: none;
+  }
+  .form{
+    width: 80%;
+  }
 }
 </style>

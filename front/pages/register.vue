@@ -110,6 +110,7 @@ const handleRegister = async () => {
   margin-top: 5px;
   outline: none;
   transition: border 0.3s;
+  width: 90%;
 }
 
 .input:focus {
@@ -146,7 +147,22 @@ const handleRegister = async () => {
 
 .image {
   width: 100%;
-  max-width: 365px;
+  max-width: 350px;
   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .login-container {
+    flex-direction: column;
+  }
+  .image-container {
+    display: none;
+  }
+  .form{
+    width: 80%;
+  }
+  .input {
+  width: 110%;
+}
 }
 </style>
