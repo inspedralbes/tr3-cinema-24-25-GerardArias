@@ -13,21 +13,24 @@ jobs:
       - name: Checkout del código
         uses: actions/checkout@v4
 
+      - name: Verificar directorio front
+        run: ls -l
+
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
           cache: 'npm'
-          cache-dependency-path: front/package-lock.json
+          cache-dependency-path: front/package-lock.json 
 
       - name: Instalar dependencias
         run: |
-          cd frontend
+          cd front 
           npm install
 
       - name: Construir Nuxt 3
         run: |
-          cd frontend
+          cd front
           npm run build
 
       - name: Subir archivos al servidor
@@ -36,7 +39,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "frontend/.output/"
+          source: "front/.output/"
           target: "/home/${{ secrets.SSH_USER }}/web/${{ secrets.DOMAIN }}/public_html"
 
       - name: Reiniciar PM2 (si es SSR)
