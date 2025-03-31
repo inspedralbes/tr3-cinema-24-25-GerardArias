@@ -1,0 +1,49 @@
+name: Deploy Nuxt3 to Hestia
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    - name: Install dependencies
+      run: |
+        cd front
+        npm install
+
+    - name: Build Nuxt3 project
+      run: |
+        cd front
+        npm run build
+
+    - name: Upload build files to server
+      uses: appleboy/scp-action@v0.1.7
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        source: "front/.output/public/*"
+        target: "/home/usuario/web/miProyecto/public_html"
+        port: 22
+
+    - name: Execute remote commands
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        script: |
+          mkdir -p /home/usuario/web/miProyecto/public_html
+          chown -R usuario:usuario /home/usuario/web/miProyecto/public_html
